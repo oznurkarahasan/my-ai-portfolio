@@ -63,7 +63,7 @@ export const portfolioData = {
                 {
                     title: "Integrating Hardware with Software: A Pi Pico Guide",
                     summary: "Getting started with MPU6050 sensors and data processing on microcontrollers.",
-                    link: "#"
+                    link: "https://medium.com/@oznurkarahasann/motion-driven-light-water-physics-pi-pico-dual-core-f170fa815a83"
                 }
             ]
         },
