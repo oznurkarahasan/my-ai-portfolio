@@ -58,3 +58,21 @@ Notes:
 ## TODO
 
 - [x] Creating the GitHub Repository and Folder Structure
+- [x] Setting up the project structure
+- [x] Designing the UI
+- [x] Implementing the AI chat assistant
+- [x] Implementing the terminal demo
+- [x] Implementing the portfolio data
+- [x] Make terminal more interactive
+- [x] Design Simulated File System Structure
+- [x] Verify Terminal Functionality
+- [x] Add explicit AI Chat instruction to help command
+- [x] Verify links are clickable and AI help is visible
+- [x] Implement onKeyDown logic for ArrowUp and ArrowDown
+- [] Terminal data needs correction about projects.
+- [] Add more features to the AI chat assistant
+- [] Add more features to the portfolio data
+- [] AI with rag integration
+- [] Page transitions
+
+
