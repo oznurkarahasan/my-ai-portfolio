@@ -90,5 +90,5 @@ Notes:
 - [] Terminal data needs correction about projects.
 - [] Add more features to the AI chat assistant
 - [] Add more features to the portfolio data
-- [] AI with rag integration
+- [x] AI with rag integration
 - [] Page Transitions: wipe, fade-through-black.
