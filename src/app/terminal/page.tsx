@@ -90,6 +90,11 @@ export default function TerminalPage() {
   const [commandHistory, setCommandHistory] = useState<string[]>([]);
   const [historyPointer, setHistoryPointer] = useState<number>(-1); // -1 means new line (not looking at history)
 
+  // Tab Completion State
+  const [tabMatches, setTabMatches] = useState<string[]>([]);
+  const [tabIndex, setTabIndex] = useState(0);
+  const [originalInput, setOriginalInput] = useState("");
+
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -124,21 +129,84 @@ export default function TerminalPage() {
     return "~/" + currentPath.join("/");
   };
 
+  const handleTabCompletion = () => {
+    if (tabMatches.length > 0) {
+      const nextIndex = (tabIndex + 1) % tabMatches.length;
+      setTabIndex(nextIndex);
+
+      const parts = originalInput.split(" ");
+      if (parts.length === 1) {
+        setInput(tabMatches[nextIndex]);
+      } else {
+        setInput(`${parts[0]} ${tabMatches[nextIndex]}`);
+      }
+      return;
+    }
+
+    const parts = input.split(" ");
+    const currentInput = parts[parts.length - 1];
+    let matches: string[] = [];
+
+    if (parts.length === 1) {
+      // Complete command
+      const commands = ["help", "ls", "cd", "cat", "whoami", "neofetch", "clear", "home", "exit"];
+      matches = commands.filter((c) => c.startsWith(currentInput.toLowerCase()));
+    } else {
+      // Complete file/dir
+      const command = parts[0].toLowerCase();
+      const prefix = parts.slice(1).join(" ");
+      const contents = getDir(currentPath);
+
+      if (command === "cd") {
+        matches = contents
+          .filter((n) => n.type === "directory" && n.name.toLowerCase().startsWith(prefix.toLowerCase()))
+          .map((n) => n.name);
+      } else if (command === "cat") {
+        matches = contents
+          .filter((n) => n.type === "file" && n.name.toLowerCase().startsWith(prefix.toLowerCase()))
+          .map((n) => n.name);
+      } else {
+        matches = contents
+          .filter((n) => n.name.toLowerCase().startsWith(prefix.toLowerCase()))
+          .map((n) => n.name);
+      }
+    }
+
+    if (matches.length > 0) {
+      setTabMatches(matches);
+      setTabIndex(0);
+      setOriginalInput(input);
+
+      if (parts.length === 1) {
+        setInput(matches[0]);
+      } else {
+        setInput(`${parts[0]} ${matches[0]}`);
+      }
+    }
+  };
+
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       handleCommand(input);
+      setTabMatches([]);
+      setTabIndex(0);
+    } else if (e.key === "Tab") {
+      e.preventDefault();
+      handleTabCompletion();
     } else if (e.key === "ArrowUp") {
       e.preventDefault();
+      setTabMatches([]);
+      setTabIndex(0);
       if (commandHistory.length === 0) return;
 
-      const newPointer = historyPointer === -1
-        ? commandHistory.length - 1
-        : Math.max(0, historyPointer - 1);
+      const newPointer = historyPointer === -1 ? commandHistory.length - 1 : Math.max(0, historyPointer - 1);
 
       setHistoryPointer(newPointer);
       setInput(commandHistory[newPointer]);
     } else if (e.key === "ArrowDown") {
       e.preventDefault();
+      setTabMatches([]);
+      setTabIndex(0);
       if (historyPointer === -1) return; // Already at new line
 
       if (historyPointer === commandHistory.length - 1) {
@@ -150,6 +218,10 @@ export default function TerminalPage() {
         setHistoryPointer(newPointer);
         setInput(commandHistory[newPointer]);
       }
+    } else if (e.key !== "Shift" && e.key !== "Control" && e.key !== "Alt" && e.key !== "Meta") {
+      // Reset tab completion if any other key is pressed (excluding modifiers)
+      setTabMatches([]);
+      setTabIndex(0);
     }
   };
 
