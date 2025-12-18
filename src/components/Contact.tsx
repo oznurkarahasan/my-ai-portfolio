@@ -16,7 +16,7 @@ export function Contact() {
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="max-w-4xl mx-auto text-center"
+                    className="max-w-6xl mx-auto text-center"
                 >
                     <div className="inline-flex items-center justify-center p-4 bg-orange-600/10 rounded-full mb-8">
                         <Mail size={32} className="text-orange-500" />

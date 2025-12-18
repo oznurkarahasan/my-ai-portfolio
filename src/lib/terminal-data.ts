@@ -34,7 +34,7 @@ A real-time vehicle tracking and mapping system that delivers accurate location 
                 content: `### ESP32-Indoor-GPS-system
 Flutter-based indoor navigation system. It uses Bluetooth Low Energy (BLE) signals for location detection and guides the user using AR (Augmented Reality) technology. 
 - **Tech:** Flutter, Dart, ARCore, ARKit.
-- **Repo:** https://github.com/oznurkarahasan/indoor-navigation-system-qrcode-augmented-reality`
+- **Repo:** https://github.com/oznurkarahasan/ESP32-Indoor-GPS-system.git`
             },
             {
                 name: 'my-ai-portfolio.md',

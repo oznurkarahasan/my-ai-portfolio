@@ -20,7 +20,24 @@ Key goals:
 - Framer Motion (animations)
 - Google Generative AI SDK (server-side only)
 - React Markdown (rendering AI output)
+- React Markdown (rendering AI output)
 - Lucide Icons
+
+## Technical Features
+
+### 1. Terminal Simulation
+
+- **Virtual File System**: A JSON-based file system structure (`terminal-data.ts`) simulates directories and files.
+- **Commands**: Supports standard Unix-like commands: `ls`, `cd`, `cat`, `whoami`, `neofetch`.
+- **Interactivity**: Command history (arrow keys) and clickable links for project repositories.
+
+### 2. RAG (Context-Aware Chat)
+
+The "Chat with my Resume" feature uses a **System Prompt Context Injection** (RAG-lite) approach:
+
+- **Crawling**: When a chat starts, the system recursively crawls the virtual file system (`projects/*.md`, `experience.md`).
+- **Context Injection**: The extracted text is injected into the Gemini AI's "System Instruction".
+- **Result**: The AI acts as an expert on the user's portfolio, answering questions based _strictly_ on the provided file contents, reducing hallucinations.
 
 ## Setup & Run
 
@@ -69,10 +86,9 @@ Notes:
 - [x] Add explicit AI Chat instruction to help command
 - [x] Verify links are clickable and AI help is visible
 - [x] Implement onKeyDown logic for ArrowUp and ArrowDown
+- [x] Refactor Blog component to fetch and render posts dynamically
 - [] Terminal data needs correction about projects.
 - [] Add more features to the AI chat assistant
 - [] Add more features to the portfolio data
 - [] AI with rag integration
-- [] Page transitions
-
-
+- [] Page Transitions: wipe, fade-through-black.

@@ -1,11 +1,31 @@
-"use client";
-
+import { useState, useRef, useEffect } from "react";
 import { useLanguage } from "@/context/LanguageContext";
 import { motion } from "framer-motion";
 import { ExternalLink } from "lucide-react";
 
 export function Projects() {
     const { t } = useLanguage();
+    const scrollRef = useRef<HTMLDivElement>(null);
+    const [showLeftFade, setShowLeftFade] = useState(false);
+    const [showRightFade, setShowRightFade] = useState(false);
+
+    const checkScroll = () => {
+        if (scrollRef.current) {
+            const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+            setShowLeftFade(scrollLeft > 10);
+            setShowRightFade(scrollLeft < scrollWidth - clientWidth - 10);
+        }
+    };
+
+    useEffect(() => {
+        checkScroll();
+        window.addEventListener('resize', checkScroll);
+        return () => window.removeEventListener('resize', checkScroll);
+    }, [t.projects.items]);
+
+    const handleScroll = () => {
+        checkScroll();
+    };
 
     return (
         <section id="projects" className="py-20">
@@ -21,47 +41,56 @@ export function Projects() {
                         {t.projects.title}
                     </motion.h2>
 
-                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {t.projects.items.map((project, index) => (
-                            <motion.div
-                                key={index}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: index * 0.1 }}
-                                className="group relative bg-stone-900 border border-stone-800 rounded-2xl overflow-hidden hover:border-orange-500/50 transition-all hover:-translate-y-1"
-                            >
-                                <div className="p-6 h-full flex flex-col">
-                                    <div className="mb-4">
-                                        <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-orange-400 transition-colors">
-                                            {project.title}
-                                        </h3>
-                                        <p className="text-stone-400 text-sm leading-relaxed mb-4">
-                                            {project.description}
-                                        </p>
-                                    </div>
-
-                                    <div className="mt-auto">
-                                        <div className="flex flex-wrap gap-2 mb-6">
-                                            {project.techStack.map((tech, i) => (
-                                                <span key={i} className="text-xs text-stone-500 font-mono">
-                                                    #{tech}
-                                                </span>
-                                            ))}
+                    <div className="relative">
+                        <div
+                            ref={scrollRef}
+                            onScroll={handleScroll}
+                            className={`flex gap-6 overflow-x-auto pt-4 pb-8 custom-scrollbar transition-all duration-300 ${showLeftFade && showRightFade ? 'mask-both' :
+                                showLeftFade ? 'mask-left' :
+                                    showRightFade ? 'mask-right' : ''
+                                }`}
+                        >
+                            {t.projects.items.map((project, index) => (
+                                <motion.div
+                                    key={index}
+                                    initial={{ opacity: 0, x: 20 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: index * 0.1 }}
+                                    className="group flex-shrink-0 w-[280px] sm:w-[320px] md:w-[350px] bg-stone-900 border border-stone-800 rounded-2xl overflow-hidden hover:border-orange-500/50 transition-all hover:-translate-y-1 snap-start"
+                                >
+                                    <div className="p-6 h-full flex flex-col">
+                                        <div className="mb-4">
+                                            <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-orange-400 transition-colors">
+                                                {project.title}
+                                            </h3>
+                                            <p className="text-stone-400 text-sm leading-relaxed mb-4">
+                                                {project.description}
+                                            </p>
                                         </div>
 
-                                        <a
-                                            href={project.link}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="inline-flex items-center gap-2 text-sm text-stone-200 font-medium hover:text-orange-400 transition-colors"
-                                        >
-                                            {t.projects.viewProject} <ExternalLink size={16} />
-                                        </a>
+                                        <div className="mt-auto">
+                                            <div className="flex flex-wrap gap-2 mb-6">
+                                                {project.techStack.map((tech, i) => (
+                                                    <span key={i} className="text-xs text-stone-500 font-mono">
+                                                        #{tech}
+                                                    </span>
+                                                ))}
+                                            </div>
+
+                                            <a
+                                                href={project.link}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="inline-flex items-center gap-2 text-sm text-stone-200 font-medium hover:text-orange-400 transition-colors"
+                                            >
+                                                {t.projects.viewProject} <ExternalLink size={16} />
+                                            </a>
+                                        </div>
                                     </div>
-                                </div>
-                            </motion.div>
-                        ))}
+                                </motion.div>
+                            ))}
+                        </div>
                     </div>
                 </div>
             </div>

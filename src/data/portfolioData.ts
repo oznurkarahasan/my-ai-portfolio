@@ -19,7 +19,7 @@ export const portfolioData = {
         about: {
             title: "About Me",
             bio: "I am a developer who loves bridging the gap between software and the physical world. I specialize in building AI-powered assistants, mobile applications with Flutter, and embedded systems using Raspberry Pi/Arduino.",
-            subBio: "From creating voice-controlled kitchen assistants to developing bio-acoustic monitoring systems, I focus on solving real-world problems with innovative technology stacks like Python, Django, and Generative AI.",
+            subBio: "From creating voice-controlled kitchen assistants to developing vehicle tracking and mapping systems, I focus on solving real-world problems with innovative technology stacks like Python, Django, and Generative AI.",
             techTitle: "Tech Stack"
         },
         experience: [
@@ -62,7 +62,7 @@ export const portfolioData = {
                     title: "Indoor Navigation (AR/BLE)",
                     description: "Flutter-based indoor navigation system for visually impaired. Uses BLE signals for detection and AR technology for guidance.",
                     techStack: ["Flutter", "Dart", "ARCore", "ARKit", "BLE"],
-                    link: "https://github.com/oznurkarahasan/indoor-navigation-system-qrcode-augmented-reality"
+                    link: "https://github.com/oznurkarahasan/ESP32-Indoor-GPS-system.git"
                 },
                 {
                     title: "DualFlow",
@@ -138,7 +138,7 @@ export const portfolioData = {
         about: {
             title: "Hakkımda",
             bio: "Yazılım dünyası ile fiziksel dünyayı birleştirmeyi seven bir mühendisim. Yapay zeka destekli asistanlar, Flutter ile mobil uygulamalar ve Raspberry Pi/Arduino tabanlı gömülü sistemler geliştirmek üzerine uzmanlaşıyorum.",
-            subBio: "Sesli mutfak asistanlarından biyo-akustik izleme sistemlerine kadar, Python, Django ve Üretken Yapay Zeka gibi modern teknolojileri kullanarak gerçek dünya problemlerine çözümler üretiyorum.",
+            subBio: "Sesli mutfak asistanlarından araç takip ve haritalama sistemlerine kadar, Python, Django ve Üretken Yapay Zeka gibi modern teknolojileri kullanarak gerçek dünya problemlerine çözümler üretiyorum.",
             techTitle: "Teknoloji Yığınım"
         },
         experience: [
@@ -181,7 +181,7 @@ export const portfolioData = {
                     title: "Bina İçi Navigasyon (AR/BLE)",
                     description: "Görme engelliler için Flutter tabanlı navigasyon. Konum tespiti için BLE sinyallerini ve yönlendirme için AR teknolojisini kullanır.",
                     techStack: ["Flutter", "Dart", "ARCore", "ARKit", "BLE"],
-                    link: "https://github.com/oznurkarahasan/indoor-navigation-system-qrcode-augmented-reality"
+                    link: "https://github.com/oznurkarahasan/ESP32-Indoor-GPS-system.git"
                 },
                 {
                     title: "DualFlow",

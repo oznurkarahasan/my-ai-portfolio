@@ -22,7 +22,7 @@ export default function Home() {
         <ChatBot />
 
         <footer className="py-8 text-center text-stone-500 text-sm border-t border-stone-900 bg-stone-950">
-          <p>© {new Date().getFullYear()} My AI Portfolio.</p>
+          <p>© {new Date().getFullYear()} My AI Portfolio - <i>designed and developed by</i> <i className="text-orange-500">Öznur Karahasan</i></p>
         </footer>
       </main>
     </LanguageProvider>

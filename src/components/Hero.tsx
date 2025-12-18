@@ -64,12 +64,29 @@ export function Hero() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5, delay: 0.2 }}
                     >
-                        <a
+                        <motion.a
                             href="#projects"
-                            className="px-8 py-3 bg-orange-600 text-white rounded-full font-semibold hover:bg-orange-700 transition-colors flex items-center gap-2 shadow-lg shadow-orange-900/20"
+                            whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(234, 88, 12, 0.4)" }}
+                            whileTap={{ scale: 0.95 }}
+                            className="relative group px-10 py-4 bg-orange-600 text-white rounded-full font-bold overflow-hidden transition-all flex items-center gap-3 shadow-xl"
                         >
-                            {t.hero.cta} <ArrowRight size={18} />
-                        </a>
+                            {/* Shimmer Effect */}
+                            <div className="absolute inset-0 w-full h-full -z-0">
+                                <div className="absolute top-0 -left-full w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12 animate-shimmer" />
+                            </div>
+
+                            <span className="relative z-10">{t.hero.cta}</span>
+                            <motion.div
+                                animate={{ x: [0, 5, 0] }}
+                                transition={{ repeat: Infinity, duration: 1.5 }}
+                                className="relative z-10"
+                            >
+                                <ArrowRight size={20} />
+                            </motion.div>
+
+                            {/* Hover Border Glow */}
+                            <div className="absolute inset-0 rounded-full border-2 border-orange-400/50 opacity-0 group-hover:opacity-100 transition-opacity" />
+                        </motion.a>
                         <div className="flex items-center gap-4 px-6 border-l border-slate-800 ml-4 pl-8">
                             <a href={social.github} target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-white transition-colors">
                                 <Github size={24} />

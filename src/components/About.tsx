@@ -14,7 +14,7 @@ export function About() {
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="max-w-4xl mx-auto"
+                    className="max-w-6xl mx-auto"
                 >
                     <h2 className="text-3xl font-bold text-white mb-8 flex items-center gap-3">
                         <span className="w-12 h-1 bg-orange-500 rounded-full"></span>
