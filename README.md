@@ -87,8 +87,10 @@ Notes:
 - [x] Verify links are clickable and AI help is visible
 - [x] Implement onKeyDown logic for ArrowUp and ArrowDown
 - [x] Refactor Blog component to fetch and render posts dynamically
+- [x] AI with rag integration
+- [x] AI chat with word word (Streaming)
+- [x] Add github stats (Real-time contribution graph)
 - [] Terminal data needs correction about projects.
 - [] Add more features to the AI chat assistant
 - [] Add more features to the portfolio data
-- [x] AI with rag integration
 - [] Page Transitions: wipe, fade-through-black.

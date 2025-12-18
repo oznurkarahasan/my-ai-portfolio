@@ -82,11 +82,30 @@ export async function POST(req: Request) {
             ],
         });
 
-        const result = await chat.sendMessage(message);
-        const response = await result.response;
-        const text = response.text();
+        const result = await chat.sendMessageStream(message);
 
-        return NextResponse.json({ text });
+        // Create a custom ReadableStream to pipe the Gemini stream to the response
+        const stream = new ReadableStream({
+            async start(controller) {
+                const encoder = new TextEncoder();
+                try {
+                    for await (const chunk of result.stream) {
+                        const chunkText = chunk.text();
+                        controller.enqueue(encoder.encode(chunkText));
+                    }
+                    controller.close();
+                } catch (err) {
+                    controller.error(err);
+                }
+            },
+        });
+
+        return new Response(stream, {
+            headers: {
+                "Content-Type": "text/plain; charset=utf-8",
+                "Transfer-Encoding": "chunked",
+            },
+        });
     } catch (error) {
         console.error("Chat API Error:", error);
         return NextResponse.json({ text: "Error: Failed to process request." }, { status: 500 });

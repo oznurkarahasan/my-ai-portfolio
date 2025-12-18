@@ -11,6 +11,49 @@ interface Message {
     content: string;
 }
 
+function TypewriterMessage({ content, isLast }: { content: string; isLast: boolean }) {
+    const [displayedContent, setDisplayedContent] = useState("");
+    const [currentIndex, setCurrentIndex] = useState(0);
+
+    // Reset typewriter if content length is shorter (happens when history is cleared or new chat starts)
+    useEffect(() => {
+        if (content.length < displayedContent.length) {
+            setDisplayedContent("");
+            setCurrentIndex(0);
+        }
+    }, [content, displayedContent.length]);
+
+    useEffect(() => {
+        if (!isLast) {
+            setDisplayedContent(content);
+            return;
+        }
+
+        if (currentIndex < content.length) {
+            const timeout = setTimeout(() => {
+                // If the gap is large (streaming catch-up), reveal more characters
+                const gap = content.length - currentIndex;
+                const increment = gap > 20 ? 5 : 1;
+
+                setDisplayedContent(prev => prev + content.slice(currentIndex, currentIndex + increment));
+                setCurrentIndex(prev => prev + increment);
+            }, 10); // Typing speed
+            return () => clearTimeout(timeout);
+        }
+    }, [content, currentIndex, isLast]);
+
+    return (
+        <ReactMarkdown
+            components={{
+                a: ({ node, ...props }) => <a {...props} className="text-orange-400 hover:underline" target="_blank" rel="noopener noreferrer" />,
+                p: ({ node, ...props }) => <p {...props} className="mb-2 last:mb-0" />
+            }}
+        >
+            {isLast ? displayedContent : content}
+        </ReactMarkdown>
+    );
+}
+
 export function ChatBot() {
     const { t } = useLanguage();
     const [isOpen, setIsOpen] = useState(false);
@@ -61,8 +104,33 @@ export function ChatBot() {
                 throw new Error(errorData.details || errorData.error || "Network response was not ok");
             }
 
-            const data = await response.json();
-            setMessages((prev) => [...prev, { role: "model", content: data.text }]);
+            // Handle streaming response
+            const reader = response.body?.getReader();
+            if (!reader) throw new Error("No reader available");
+
+            const decoder = new TextDecoder();
+            let assistantMessage = "";
+
+            // Add an empty model message that we'll update
+            setMessages((prev) => [...prev, { role: "model", content: "" }]);
+
+            while (true) {
+                const { done, value } = await reader.read();
+                if (done) break;
+
+                const chunk = decoder.decode(value, { stream: true });
+                assistantMessage += chunk;
+
+                // Update the last message (the model's message) with the accumulated content
+                setMessages((prev) => {
+                    const newMessages = [...prev];
+                    newMessages[newMessages.length - 1] = {
+                        role: "model",
+                        content: assistantMessage,
+                    };
+                    return newMessages;
+                });
+            }
         } catch (error: any) {
             console.error("Error:", error);
             setMessages((prev) => [
@@ -121,14 +189,7 @@ export function ChatBot() {
                                     >
                                         {msg.role === "model" ? (
                                             <div className="prose prose-invert prose-sm max-w-none">
-                                                <ReactMarkdown
-                                                    components={{
-                                                        a: ({ node, ...props }) => <a {...props} className="text-orange-400 hover:underline" target="_blank" rel="noopener noreferrer" />,
-                                                        p: ({ node, ...props }) => <p {...props} className="mb-2 last:mb-0" />
-                                                    }}
-                                                >
-                                                    {msg.content}
-                                                </ReactMarkdown>
+                                                <TypewriterMessage content={msg.content} isLast={index === messages.length - 1} />
                                             </div>
                                         ) : (
                                             msg.content

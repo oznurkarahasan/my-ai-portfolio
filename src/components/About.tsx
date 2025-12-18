@@ -3,6 +3,7 @@
 import { useLanguage } from "@/context/LanguageContext";
 import { portfolioData } from "@/data/portfolioData";
 import { motion } from "framer-motion";
+import { GitHubStats } from "./GitHubStats";
 
 export function About() {
     const { t } = useLanguage();
@@ -40,6 +41,9 @@ export function About() {
                             </div>
                         </div>
                     </div>
+
+                    {/* GitHub Stats Integration */}
+                    <GitHubStats />
                 </motion.div>
             </div>
         </section>
