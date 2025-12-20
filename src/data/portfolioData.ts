@@ -43,7 +43,7 @@ export const portfolioData = {
                 {
                     title: "Danilo: Voice Kitchen Assistant",
                     description: "An AI-powered voice assistant for the kitchen. Uses Adaptive RAG architecture and FAISS for semantic search to provide personalized recipe guidance.",
-                    techStack: ["Python", "Django", "GPT-4o", "FAISS", "RAG"],
+                    techStack: ["Python", "Django", "GPT-4o", "FAISS", "RAG", "Generative AI"],
                     link: "#"
                 },
                 {
@@ -61,13 +61,13 @@ export const portfolioData = {
                 {
                     title: "Indoor Navigation (AR/BLE)",
                     description: "Flutter-based indoor navigation system for visually impaired. Uses BLE signals for detection and AR technology for guidance.",
-                    techStack: ["Flutter", "Dart", "ARCore", "ARKit", "BLE"],
+                    techStack: ["Flutter", "Dart", "ARCore", "ARKit", "BLE", "Embedded Systems", "ESP32"],
                     link: "https://github.com/oznurkarahasan/ESP32-Indoor-GPS-system.git"
                 },
                 {
                     title: "DualFlow",
                     description: "A virtual fluid physics engine simulating a 'digital water balance'. Responds to inertia and momentum through motion-based input.",
-                    techStack: ["C++", "Raspberry Pi Pico", "MPU6050", "I2C"],
+                    techStack: ["C++", "Raspberry Pi Pico", "MPU6050", "I2C", "Embedded Systems"],
                     link: "https://github.com/oznurkarahasan/DualFlow.git"
                 },
                 {
@@ -91,7 +91,7 @@ export const portfolioData = {
                 {
                     title: "My AI Portfolio",
                     description: "This interactive Terminal/Shell based portfolio built with modern web technologies.",
-                    techStack: ["Next.js 14", "TypeScript", "Tailwind CSS", "Framer Motion"],
+                    techStack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion"],
                     link: "https://github.com/oznurkarahasan/my-ai-portfolio"
                 }
             ]
@@ -162,7 +162,7 @@ export const portfolioData = {
                 {
                     title: "Danilo: Sesli Mutfak Asistanı",
                     description: "Mutfaklar için geliştirilmiş yapay zeka asistanı. Kişiselleştirilmiş tarif rehberliği için Adaptive RAG mimarisi ve FAISS kullanır.",
-                    techStack: ["Python", "Django", "GPT-4o", "FAISS", "RAG"],
+                    techStack: ["Python", "Django", "GPT-4o", "FAISS", "RAG", "Generative AI"],
                     link: "#"
                 },
                 {
@@ -180,13 +180,13 @@ export const portfolioData = {
                 {
                     title: "Bina İçi Navigasyon (AR/BLE)",
                     description: "Görme engelliler için Flutter tabanlı navigasyon. Konum tespiti için BLE sinyallerini ve yönlendirme için AR teknolojisini kullanır.",
-                    techStack: ["Flutter", "Dart", "ARCore", "ARKit", "BLE"],
+                    techStack: ["Flutter", "Dart", "ARCore", "ARKit", "BLE", "Embedded Systems", "ESP32"],
                     link: "https://github.com/oznurkarahasan/ESP32-Indoor-GPS-system.git"
                 },
                 {
                     title: "DualFlow",
                     description: "Dijital su dengesini simüle eden sanal akışkan fiziği motoru. Hareket bazlı girdilere (atalet/momentum) gerçek zamanlı tepki verir.",
-                    techStack: ["C++", "Raspberry Pi Pico", "MPU6050", "I2C"],
+                    techStack: ["C++", "Raspberry Pi Pico", "MPU6050", "I2C", "Embedded Systems"],
                     link: "https://github.com/oznurkarahasan/DualFlow.git"
                 },
                 {
@@ -210,7 +210,7 @@ export const portfolioData = {
                 {
                     title: "Yapay Zeka Portfolyom",
                     description: "Modern web teknolojileri ile oluşturulmuş, etkileşimli Terminal/Shell tabanlı portfolyo sitesi.",
-                    techStack: ["Next.js 14", "TypeScript", "Tailwind CSS", "Framer Motion"],
+                    techStack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion"],
                     link: "https://github.com/oznurkarahasan/my-ai-portfolio"
                 }
             ]
@@ -257,7 +257,6 @@ export const portfolioData = {
         "Generative AI / RAG / FAISS",
         "Embedded Systems (Raspberry Pi Pico/ESP32)",
         "C++ / OpenCV / MAVLink",
-        "Docker / n8n Automation",
         "SQL Server / PostgreSQL / MySQL"
     ],
     systemPrompt: `You are an AI assistant for a Full Stack Developer & IoT Engineer's portfolio.

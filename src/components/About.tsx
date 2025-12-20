@@ -3,10 +3,26 @@
 import { useLanguage } from "@/context/LanguageContext";
 import { portfolioData } from "@/data/portfolioData";
 import { motion } from "framer-motion";
+import { useFilter } from "@/context/FilterContext";
 import { GitHubStats } from "./GitHubStats";
 
 export function About() {
     const { t } = useLanguage();
+    const { selectedTech, setSelectedTech } = useFilter();
+
+    const handleTechClick = (skill: string) => {
+        // Extract base technology name if it has extra info in parentheses or after slashes
+        // e.g., "Python (Django/FastAPI/LightGBM)" -> "Python"
+        // e.g., "Generative AI / RAG / FAISS" -> "Generative AI"
+        const baseTech = skill.split(/ \/ | \(|\)/)[0].trim();
+        setSelectedTech(baseTech);
+
+        // Scroll to projects section
+        const projectsSection = document.getElementById('projects');
+        if (projectsSection) {
+            projectsSection.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
 
     return (
         <section id="about" className="py-20 bg-stone-900/50">
@@ -33,11 +49,23 @@ export function About() {
                         <div>
                             <h3 className="text-xl font-semibold text-white mb-4">{t.about.techTitle}</h3>
                             <div className="flex flex-wrap gap-2">
-                                {portfolioData.skills.map((skill, index) => (
-                                    <span key={index} className="px-3 py-1 bg-stone-800 text-orange-200 border border-stone-700 rounded-full text-sm hover:border-orange-500/50 transition-colors cursor-default">
-                                        {skill}
-                                    </span>
-                                ))}
+                                {portfolioData.skills.map((skill, index) => {
+                                    const baseTech = skill.split(/ \/ | \(|\)/)[0].trim();
+                                    const isActive = selectedTech === baseTech;
+
+                                    return (
+                                        <button
+                                            key={index}
+                                            onClick={() => handleTechClick(skill)}
+                                            className={`px-3 py-1 bg-stone-800 text-sm border border-stone-700 rounded-full transition-all hover:border-orange-500/50 ${isActive
+                                                ? 'border-orange-500 text-orange-400 bg-stone-800/80 shadow-[0_0_10px_rgba(249,115,22,0.2)]'
+                                                : 'text-orange-200'
+                                                }`}
+                                        >
+                                            {skill}
+                                        </button>
+                                    );
+                                })}
                             </div>
                         </div>
                     </div>

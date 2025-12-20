@@ -90,7 +90,17 @@ Notes:
 - [x] AI with rag integration
 - [x] AI chat with word word (Streaming)
 - [x] Add github stats (Real-time contribution graph)
-- [] Terminal data needs correction about projects.
-- [] Add more features to the AI chat assistant
-- [] Add more features to the portfolio data
+- [X] İf you click a tech stack, it should show the projects that use that tech stack.
+- [X] Terminal data needs correction about projects.
+- [X] Add more features to the AI chat assistant
+- [X] Add more features to the portfolio data
 - [] Page Transitions: wipe, fade-through-black.
+
+## Interface View
+
+![Interface View](docs/1.png)
+![Interface View](docs/2.png)
+![Interface View](docs/3.png)
+![Interface View](docs/4.png)
+![Interface View](docs/5.png)
+![Interface View](docs/terminal.png)
