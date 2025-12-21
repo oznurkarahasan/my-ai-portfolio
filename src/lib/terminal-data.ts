@@ -90,7 +90,23 @@ A WinForms application for managing student, department, course, and grade data 
     {
         name: 'experience.md',
         type: 'file',
-        content: `### Intern Software Developer | Zerosoft
+        content: `### C++ Intern | Kedy.ai
+*December 2025 - Current*
+
+- Contributed to a cloud-native, GPU-accelerated video rendering engine developed with C++14, OpenGL, and FFmpeg.
+
+---
+
+### Intern Software Developer | Zerosoft
+*August 2025 - November 2025*
+
+- A QR code–based ordering and stock management system was developed using PHP (Laravel 12) and MySQL with role-based access control.
+- Full-stack development experience was gained through MVC architecture, CRUD operations, database optimisation, and responsive UI with Bootstrap.
+- The system's reliability and interactivity were enhanced through AJAX operations, CSRF protection and session-based activity control.
+
+---
+
+### Intern Software Developer | Zerosoft
 *August 2025 - November 2025*
 
 - A QR code–based ordering and stock management system was developed using PHP (Laravel 12) and MySQL with role-based access control.

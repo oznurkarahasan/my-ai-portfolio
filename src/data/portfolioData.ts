@@ -24,6 +24,12 @@ export const portfolioData = {
         },
         experience: [
             {
+                company: "Kedy.ai",
+                role: "C++ Intern",
+                period: "December 2025 - Current",
+                details: "Contributed to a cloud-native, GPU-accelerated video rendering engine developed with C++14, OpenGL, and FFmpeg."
+            },
+            {
                 company: "Zerosoft",
                 role: "Intern Software Developer",
                 period: "August 2025 - November 2025",
@@ -142,6 +148,12 @@ export const portfolioData = {
             techTitle: "Teknoloji Yığınım"
         },
         experience: [
+            {
+                company: "Kedy.ai",
+                role: "C++ Stajyeri",
+                period: "Aralık 2025 - Şu anda",
+                details: "C++14 , OpenGL, ve FFmpeg ile geliştirilen bir bulut-native, GPU-accelerated video rendering engine geliştirildi."
+            },
             {
                 company: "Zerosoft",
                 role: "Stajyer Yazılım Geliştirici",
