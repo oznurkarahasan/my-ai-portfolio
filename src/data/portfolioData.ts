@@ -50,7 +50,7 @@ export const portfolioData = {
                     title: "Danilo: Voice Kitchen Assistant",
                     description: "An AI-powered voice assistant for the kitchen. Uses Adaptive RAG architecture and FAISS for semantic search to provide personalized recipe guidance.",
                     techStack: ["Python", "Django", "GPT-4o", "FAISS", "RAG", "Generative AI"],
-                    link: "#"
+                    link: "https://github.com/oznurkarahasan/Danilo.git"
                 },
                 {
                     title: "Wastewater Predictive Maintenance",
@@ -107,18 +107,13 @@ export const portfolioData = {
             readMore: "Read on Medium",
             items: [
                 {
-                    title: "GPS-Based Mapping and Path Planning System with C++: An Integrated Solution for Real-Time Navigation",
-                    summary: "This study presents the design and implementation of a GPS-based mapping and path planning system developed using the C++ programming language. The system receives GPS data via the MAVLink protocol, performs noise reduction using a Kalman filter, stores route information in an SQLite database, and provides real-time map visualization with the OpenCV library. Optimal path planning using the A* algorithm is also integrated into the system. The developed system addresses the critical need for real-time localization and path planning, which is crucial for autonomous vehicles, drone navigation, and robotic applications.",
+                    title: "GPS-Based Mapping and Path Planning System with C++",
+                    summary: "Design and implementation of a GPS-based mapping system using C++, featuring Kalman filtering, SQLite storage, and A* path planning for autonomous navigation.",
                     link: "https://medium.com/@oznurkarahasann/gps-based-mapping-and-path-planning-system-with-c-an-integrated-solution-for-real-time-c0598b12c81e"
                 },
                 {
-                    title: "Flutter & BLE: The Future of Indoor Navigation",
-                    summary: "Challenges and solutions in creating accessible navigation apps for the visually impaired.",
-                    link: "#"
-                },
-                {
-                    title: "Integrating Hardware with Software: A Pi Pico Guide",
-                    summary: "Getting started with MPU6050 sensors and data processing on microcontrollers.",
+                    title: "Motion-Driven Light: Water Physics on Pi Pico Dual-Core",
+                    summary: "Building a virtual fluid physics engine on Raspberry Pi Pico that simulates digital water balance through motion-based input and dynamic LED output.",
                     link: "https://medium.com/@oznurkarahasann/motion-driven-light-water-physics-pi-pico-dual-core-f170fa815a83"
                 }
             ]
@@ -175,7 +170,7 @@ export const portfolioData = {
                     title: "Danilo: Sesli Mutfak Asistanı",
                     description: "Mutfaklar için geliştirilmiş yapay zeka asistanı. Kişiselleştirilmiş tarif rehberliği için Adaptive RAG mimarisi ve FAISS kullanır.",
                     techStack: ["Python", "Django", "GPT-4o", "FAISS", "RAG", "Generative AI"],
-                    link: "#"
+                    link: "https://github.com/oznurkarahasan/Danilo.git"
                 },
                 {
                     title: "Atıksu Tahminleyici Bakım",
@@ -232,19 +227,24 @@ export const portfolioData = {
             readMore: "Medium'da Oku",
             items: [
                 {
+                    title: "Atık Su Arıtma Tesislerinde Anomali Tespiti ve Arıza Tahmini",
+                    summary: "Atık su arıtma tesislerinde anomali tespiti ve arıza tahmini için yapay zeka teknolojilerini kullanarak bir makine öğrenmesi modeli geliştirilmesi",
+                    link: "https://medium.com/@oznurkarahasann/at%C4%B1k-su-ar%C4%B1tma-tesislerinde-anomali-tespiti-ve-ar%C4%B1za-tahmini-957967c9a8ad"
+                },
+                {
+                    title: "ChatGPT Atlas: OpenAI’nin Yapay Zeka Web Tarayıcısı",
+                    summary: "OpenAI'nin yapay zeka web tarayıcısı olan ChatGPT Atlas'ını inceleyerek, yapay zeka teknolojilerini kullanarak web tarayıcısı oluşturmayı amaçlıyor.",
+                    link: "https://medium.com/@oznurkarahasann/chatgpt-atlas-openainin-yapay-zeka-web-taray%C4%B1c%C4%B1s%C4%B1-a6c10f900d40"
+                },
+                {
                     title: "LIO-SAM Kurulumu ve Çalıştırma Rehberi",
-                    summary: "ROS 2 Humble ortamında LIO-SAM (LIDAR Inertial Odometry via Smoothing and Mapping) kurulumunu ve çalıştırılmasını adım adım açıklar. Aşağıdaki talimatlar, Ubuntu 22.04 üzerinde test edilmiştir ve GTSAM kütüphanesi ile LIO-SAM’in ROS 2 ile uyumlu bir şekilde çalışmasını sağlar.",
+                    summary: "ROS 2 Humble ortamında LIO-SAM (LIDAR Inertial Odometry via Smoothing and Mapping) kurulumunu ve çalıştırılmasını adım adım açıklar.",
                     link: "https://medium.com/@oznurkarahasann/lio-sam-kurulumu-ve-%C3%A7al%C4%B1%C5%9Ft%C4%B1rma-rehberi-9b895e929806"
                 },
                 {
-                    title: "Flutter ve BLE: İç Mekan Navigasyonunun Geleceği",
-                    summary: "Görme engelliler için erişilebilir uygulamalar geliştirirken karşılaşılan zorluklar ve çözümler.",
-                    link: "https://medium.com/@oznurkarahasann"
-                },
-                {
-                    title: "Yazılımı Donanımla Birleştirmek: Pi Pico Rehberi",
-                    summary: "Mikrodenetleyicilerde MPU6050 sensör verilerini okuma ve işleme üzerine teknik bir bakış.",
-                    link: "https://medium.com/@oznurkarahasann"
+                    title: "Hareketle Çalışan Işık (Su Fiziği) — Pi Pico Çift Çekirdek",
+                    summary: "Building a virtual fluid physics engine on Raspberry Pi Pico that simulates digital water balance through motion-based input and dynamic LED output.",
+                    link: "https://medium.com/@oznurkarahasann/hareketle-%C3%A7al%C4%B1%C5%9Fan-i%C5%9F%C4%B1k-su-fizi%C4%9Fi-pi-pico-%C3%A7ift-%C3%A7ekirdek-b955a7b516ed"
                 }
             ]
         },

@@ -72,6 +72,14 @@ CineMood is a web application for discovering, searching, and recommending movie
 - **Repo:** https://github.com/oznurkarahasan/CineMood.git`
             },
             {
+                name: 'danilo.md',
+                type: 'file',
+                content: `### Danilo: Voice Kitchen Assistant
+An AI-powered voice assistant for the kitchen. Uses Adaptive RAG architecture and FAISS for semantic search to provide personalized recipe guidance.
+- **Tech:** Python, Django, GPT-4o, FAISS, RAG, Generative AI.
+- **Repo:** https://github.com/oznurkarahasan/Danilo.git`
+            },
+            {
                 name: 'ogrenci-not-kayit-sistemi.md',
                 type: 'file',
                 content: `### Ogrenci-not-kayit-sistemi
