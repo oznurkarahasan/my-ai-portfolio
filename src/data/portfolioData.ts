@@ -115,6 +115,11 @@ export const portfolioData = {
                     title: "Motion-Driven Light: Water Physics on Pi Pico Dual-Core",
                     summary: "Building a virtual fluid physics engine on Raspberry Pi Pico that simulates digital water balance through motion-based input and dynamic LED output.",
                     link: "https://medium.com/@oznurkarahasann/motion-driven-light-water-physics-pi-pico-dual-core-f170fa815a83"
+                },
+                {
+                    title: "Anomaly Detection and Predictive Maintenance in Wastewater Treatment Plants",
+                    summary: "Optimizing industrial processes at wastewater treatment plants to make a fundamental contribution to the Smart City ecosystem",
+                    link: "https://medium.com/@oznurkarahasann/anomaly-detection-and-predictive-maintenance-in-wastewater-treatment-plants-aeddbfcad743"
                 }
             ]
         },
