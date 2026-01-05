@@ -130,7 +130,7 @@ export const portfolioData = {
             social: "Follow Me"
         },
         chatbot: {
-            initialMessage: "Hi! I'm the AI Assistant. Ask me about my projects like 'Danilo' or my experience with Flutter and IoT.",
+            initialMessage: "Hi! I'm Olric. The AI Assistant. Ask me about my projects like 'Danilo' or my experience with Flutter and IoT.",
             placeholder: "Ask about the projects...",
             thinking: "Processing..."
         }
@@ -260,7 +260,7 @@ export const portfolioData = {
             social: "Takip Et"
         },
         chatbot: {
-            initialMessage: "Merhaba! Ben AI Asistanım. Bana 'Danilo' projesini, Flutter deneyimimi veya gömülü sistem projelerimi sorabilirsin.",
+            initialMessage: "Merhaba! Ben Olric. Yapay Zeka Asistanı. Bana 'Danilo' projesini, Flutter deneyimimi veya gömülü sistem projelerimi sorabilirsin.",
             placeholder: "Projeler hakkında sor...",
             thinking: "Düşünüyor..."
         }

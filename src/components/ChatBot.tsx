@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { Send, Bot, X, MessageSquare, Loader2 } from "lucide-react";
+import { Send, Bot, X, MessageSquare, Loader2, Sun } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
@@ -161,15 +161,15 @@ export function ChatBot() {
                         initial={{ opacity: 0, y: 20, scale: 0.95 }}
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 20, scale: 0.95 }}
-                        className="fixed bottom-24 right-6 w-full max-w-[350px] sm:max-w-[400px] h-[500px] bg-stone-900 border border-stone-700 rounded-2xl shadow-2xl flex flex-col overflow-hidden z-50"
+                        className="fixed bottom-24 right-6 w-full max-w-[350px] sm:max-w-[400px] h-[500px] bg-stone-900/50 backdrop-blur-md border border-stone-700/30 rounded-2xl shadow-2xl flex flex-col overflow-hidden z-50"
                     >
                         {/* Header */}
-                        <div className="p-4 bg-stone-800 border-b border-stone-700 flex items-center gap-3">
-                            <div className="w-10 h-10 rounded-full bg-orange-600 flex items-center justify-center">
-                                <Bot size={20} className="text-white" />
+                        <div className="p-4 bg-stone-800/50 backdrop-blur-sm border-b border-stone-700/30 flex items-center gap-3">
+                            <div className="w-10 h-10 flex items-center justify-center">
+                                <Sun size={24} className="text-orange-500" />
                             </div>
                             <div>
-                                <h3 className="font-semibold text-white">Portfolio Bot</h3>
+                                <h3 className="font-semibold text-white">Ask Olric</h3>
                             </div>
                         </div>
 
@@ -184,7 +184,7 @@ export function ChatBot() {
                                     <div
                                         className={`max-w-[80%] rounded-2xl p-3 text-sm ${msg.role === "user"
                                             ? "bg-orange-600 text-white rounded-tr-none"
-                                            : "bg-stone-800 text-stone-200 rounded-tl-none border border-stone-700"
+                                            : "bg-stone-800/50 backdrop-blur-sm text-stone-200 rounded-tl-none border border-stone-700/30"
                                             }`}
                                     >
                                         {msg.role === "model" ? (
@@ -199,7 +199,7 @@ export function ChatBot() {
                             ))}
                             {isLoading && (
                                 <div className="flex justify-start">
-                                    <div className="bg-stone-800 rounded-2xl p-3 px-4 rounded-tl-none border border-stone-700 flex items-center gap-2">
+                                    <div className="bg-stone-800/50 backdrop-blur-sm rounded-2xl p-3 px-4 rounded-tl-none border border-stone-700/30 flex items-center gap-2">
                                         <Loader2 size={16} className="animate-spin text-orange-400" />
                                         <span className="text-xs text-stone-400">{t.chatbot.thinking}</span>
                                     </div>
@@ -211,7 +211,7 @@ export function ChatBot() {
                         {/* Input Area */}
                         <form
                             onSubmit={handleSubmit}
-                            className="p-4 bg-stone-800 border-t border-stone-700"
+                            className="p-4 bg-stone-800/50 backdrop-blur-sm border-t border-stone-700/30"
                         >
                             <div className="relative">
                                 <input
@@ -219,7 +219,7 @@ export function ChatBot() {
                                     value={input}
                                     onChange={(e) => setInput(e.target.value)}
                                     placeholder={t.chatbot.placeholder}
-                                    className="w-full bg-stone-950 text-white border border-stone-700 rounded-full py-3 pl-4 pr-12 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent placeholder-stone-500 text-sm"
+                                    className="w-full bg-stone-950/50 text-white border border-stone-700/30 rounded-full py-3 pl-4 pr-12 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent placeholder-stone-500 text-sm"
                                 />
                                 <button
                                     type="submit"

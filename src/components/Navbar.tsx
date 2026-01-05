@@ -140,6 +140,43 @@ export function Navbar() {
                 </button>
             </div>
 
+            {/* Mobile Terminal Preview */}
+            <div className="md:hidden">
+                <AnimatePresence>
+                    {showTerminalPreview && !isMobileMenuOpen && (
+                        <motion.div
+                            onClick={() => router.push('/terminal')}
+                            initial={{ opacity: 0, y: -20, scale: 0.9 }}
+                            animate={{ opacity: 1, y: 0, scale: 1 }}
+                            exit={{ opacity: 0, y: -20, scale: 0.9 }}
+                            transition={{ duration: 0.3 }}
+                            className="fixed top-20 left-1/2 -translate-x-1/2 w-[90%] max-w-[320px] bg-black border border-orange-500/30 rounded-lg shadow-2xl overflow-hidden z-50 cursor-pointer"
+                        >
+                            {/* Terminal Header */}
+                            <div className="bg-orange-500/10 border-b border-orange-500/20 px-3 py-1.5 flex items-center justify-between">
+                                <div className="flex gap-1.5">
+                                    <div className="w-2.5 h-2.5 rounded-full bg-red-500/50"></div>
+                                    <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/50"></div>
+                                    <div className="w-2.5 h-2.5 rounded-full bg-green-500/50"></div>
+                                </div>
+                                <div className="text-[10px] text-orange-500/70 font-mono text-center flex-1">TERMINAL PREVIEW</div>
+                            </div>
+
+                            {/* Terminal Content */}
+                            <div className="p-3 font-mono text-[10px] text-orange-500/80 leading-relaxed">
+                                <div className="flex gap-2">
+                                    <span className="text-green-500">$</span>
+                                    <span>mobile_access_init</span>
+                                </div>
+                                <div className="mt-1 text-white/90 border-l-2 border-orange-500 pl-2">
+                                    "Tap to enter the terminal..."
+                                </div>
+                            </div>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+            </div>
+
             {/* Mobile Menu Overlay */}
             <AnimatePresence>
                 {isMobileMenuOpen && (
@@ -155,9 +192,17 @@ export function Navbar() {
                                     key={link.name}
                                     href={link.href}
                                     onClick={() => setIsMobileMenuOpen(false)}
-                                    className="text-slate-300 hover:text-orange-500 font-medium py-2 block"
+                                    className={`py-2 px-4 rounded-md transition-all duration-300 font-medium block ${link.name === 'TERMINAL'
+                                        ? 'text-orange-500 font-bold font-mono border border-orange-500/50 bg-orange-500/10 shadow-[0_0_10px_rgba(249,115,22,0.2)] animate-pulse'
+                                        : 'text-slate-300 hover:text-orange-500'
+                                        }`}
                                 >
-                                    {link.name}
+                                    {link.name === 'TERMINAL' ? (
+                                        <span className="flex items-center gap-2">
+                                            <span>{'>_'}</span>
+                                            {link.name}
+                                        </span>
+                                    ) : link.name}
                                 </a>
                             ))}
                             <button
