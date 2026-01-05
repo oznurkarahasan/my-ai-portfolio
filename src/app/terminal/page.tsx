@@ -256,10 +256,7 @@ export default function TerminalPage() {
           "- whoami: Display current user\n" +
           "- neofetch: System information\n" +
           "- clear: Clear terminal\n" +
-          "- home / exit: Return to main site\n\n" +
-          "AI CHAT:\n" +
-          "- Type any other text to chat with the AI Assistant.\n" +
-          "  Example: 'What technologies do you use?'";
+          "- home / exit: Return to main site\n";
         break;
 
       case "clear":
