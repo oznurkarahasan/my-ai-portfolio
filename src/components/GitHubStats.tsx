@@ -1,6 +1,11 @@
 "use client";
 
-import { GitHubCalendar } from "react-github-calendar";
+import dynamic from "next/dynamic";
+
+const GitHubCalendar = dynamic(
+    () => import("react-github-calendar").then((mod) => mod.GitHubCalendar),
+    { ssr: false }
+);
 import { motion } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
 
