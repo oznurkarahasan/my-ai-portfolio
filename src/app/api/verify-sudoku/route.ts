@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 export async function POST(req: Request) {
     try {
         const { originalPuzzle, userGrid, date, language } = await req.json();
-        const apiKey = process.env.GEMINI_API_KEY;
+        const apiKey = process.env.SUDOKU_API_KEY;
 
         if (!apiKey) {
             return NextResponse.json({ message: "Error: API Key not configured." }, { status: 500 });
