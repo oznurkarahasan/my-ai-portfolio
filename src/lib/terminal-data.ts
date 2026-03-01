@@ -87,6 +87,15 @@ A WinForms application for managing student, department, course, and grade data 
 - **Tech:** C#, SQL Server, Entity Framework 6, .NET Framework 4.7.2.
 - **Features:** Student, department, course, and grade management.
 - **Repo:** https://github.com/oznurkarahasan/Ogrenci-not-kayit-sistemi.git`
+            },
+            {
+                name: 'sudoku-game.md',
+                type: 'file',
+                content: `### AI Sudoku Game
+A modern, interactive Sudoku game built as part of this portfolio. It features daily challenges, multiple difficulty levels, and AI-powered solution verification using Gemini 1.5 Flash.
+- **Tech:** Next.js, TypeScript, Framer Motion, Gemini API, Sudoku-gen.
+- **Features:** Daily puzzles, Undo/Reset functionality, AI analysis of solutions, Multi-language support (EN/TR).
+- **Play:** You can play it directly on this site!`
             }
         ]
     },
