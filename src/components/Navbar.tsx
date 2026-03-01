@@ -1,13 +1,14 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { useLanguage } from "@/context/LanguageContext";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Globe, Sun } from "lucide-react";
 
 export function Navbar() {
     const router = useRouter();
+    const pathname = usePathname();
     const { language, setLanguage, t } = useLanguage();
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -40,11 +41,13 @@ export function Navbar() {
         setLanguage(language === 'en' ? 'tr' : 'en');
     };
 
+    const isHomePage = pathname === "/";
+
     const navLinks = [
-        { name: language === 'en' ? 'About' : 'Hakkımda', href: '#about' },
-        { name: language === 'en' ? 'Projects' : 'Projeler', href: '#projects' },
-        { name: 'Blog', href: '#blog' },
-        { name: language === 'en' ? 'Contact' : 'İletişim', href: '#contact' },
+        { name: language === 'en' ? 'About' : 'Hakkımda', href: isHomePage ? '#about' : '/#about' },
+        { name: language === 'en' ? 'Projects' : 'Projeler', href: isHomePage ? '#projects' : '/#projects' },
+        { name: 'Blog', href: isHomePage ? '#blog' : '/#blog' },
+        { name: language === 'en' ? 'Contact' : 'İletişim', href: isHomePage ? '#contact' : '/#contact' },
         { name: 'SUDOKU', href: '/puzzle' },
         { name: 'TERMINAL', href: '/terminal' },
     ];
@@ -58,7 +61,7 @@ export function Navbar() {
             transition={{ duration: 0.5 }}
         >
             <div className="container mx-auto px-6 flex items-center justify-between">
-                <a href="#" className="flex items-center gap-2 text-2xl font-bold text-white tracking-tighter group">
+                <a href="/" className="flex items-center gap-2 text-2xl font-bold text-white tracking-tighter group">
                     <Sun className="w-8 h-8 text-orange-500 transition-transform duration-500 group-hover:rotate-180" />
                 </a>
 
