@@ -45,6 +45,7 @@ export function Navbar() {
         { name: language === 'en' ? 'Projects' : 'Projeler', href: '#projects' },
         { name: 'Blog', href: '#blog' },
         { name: language === 'en' ? 'Contact' : 'İletişim', href: '#contact' },
+        { name: 'SUDOKU', href: '/puzzle' },
         { name: 'TERMINAL', href: '/terminal' },
     ];
 
