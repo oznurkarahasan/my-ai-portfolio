@@ -9,7 +9,8 @@ import {
     RefreshCcw,
     ArrowLeft,
     CheckCircle2,
-    AlertCircle
+    AlertCircle,
+    Undo2
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -25,6 +26,7 @@ export function SudokuHero({ onBack }: SudokuHeroProps) {
     const { t, language } = useLanguage();
     const [originalString, setOriginalString] = useState<string>("");
     const [grid, setGrid] = useState<SudokuGrid>([]);
+    const [history, setHistory] = useState<SudokuGrid[]>([]);
     const [isVerifying, setIsVerifying] = useState(false);
     const [aiResponse, setAiResponse] = useState<string | null>(null);
     const [date, setDate] = useState<string>("");
@@ -42,6 +44,7 @@ export function SudokuHero({ onBack }: SudokuHeroProps) {
 
         setOriginalString(puzzleStr);
         setGrid(newGrid);
+        setHistory([]);
         setAiResponse(null);
 
         localStorage.setItem("daily-sudoku", JSON.stringify({
@@ -64,6 +67,7 @@ export function SudokuHero({ onBack }: SudokuHeroProps) {
                     setOriginalString(parsed.original);
                     setGrid(parsed.userGrid);
                     setDifficulty(parsed.difficulty || "medium");
+                    setHistory([]);
                     return;
                 }
             } catch (e) {
@@ -76,6 +80,9 @@ export function SudokuHero({ onBack }: SudokuHeroProps) {
     const handleCellChange = (rowIndex: number, colIndex: number, value: string) => {
         if (!/^[1-9]?$/.test(value)) return;
 
+        // Save current state to history before changing
+        setHistory(prev => [...prev, grid.map(row => [...row])]);
+
         const newGrid = [...grid.map(row => [...row])];
         newGrid[rowIndex][colIndex] = value;
         setGrid(newGrid);
@@ -84,6 +91,40 @@ export function SudokuHero({ onBack }: SudokuHeroProps) {
             date,
             original: originalString,
             userGrid: newGrid,
+            difficulty
+        }));
+    };
+
+    const handleUndo = () => {
+        if (history.length === 0) return;
+
+        const previousGrid = history[history.length - 1];
+        setGrid(previousGrid);
+        setHistory(prev => prev.slice(0, -1));
+
+        localStorage.setItem("daily-sudoku", JSON.stringify({
+            date,
+            original: originalString,
+            userGrid: previousGrid,
+            difficulty
+        }));
+    };
+
+    const handleReset = () => {
+        const resetGrid: string[][] = [];
+        for (let i = 0; i < 9; i++) {
+            const row = originalString.slice(i * 9, i * 9 + 9).split("");
+            resetGrid.push(row.map(char => (char === "-" ? "" : char)));
+        }
+
+        setGrid(resetGrid);
+        setHistory([]);
+        setAiResponse(null);
+
+        localStorage.setItem("daily-sudoku", JSON.stringify({
+            date,
+            original: originalString,
+            userGrid: resetGrid,
             difficulty
         }));
     };
@@ -127,15 +168,7 @@ export function SudokuHero({ onBack }: SudokuHeroProps) {
                     transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                     className="max-w-5xl mx-auto"
                 >
-                    {/* Header Action */}
-                    <motion.button
-                        whileHover={{ x: -5 }}
-                        onClick={onBack}
-                        className="mb-8 flex items-center gap-2 text-slate-500 hover:text-orange-500 transition-all font-mono text-xs tracking-widest uppercase group"
-                    >
-                        <ArrowLeft size={14} className="group-hover:text-orange-400" />
-                        <span>{t.sudoku.backButton}</span>
-                    </motion.button>
+
 
                     <div className="grid lg:grid-cols-[1fr,400px] gap-12 items-start">
                         {/* Sudoku Board Column */}
@@ -157,107 +190,130 @@ export function SudokuHero({ onBack }: SudokuHeroProps) {
                                 </p>
                             </div>
 
-                            {/* Board Container */}
-                            <motion.div
-                                initial={{ opacity: 0, scale: 0.98 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                transition={{ delay: 0.2 }}
-                                className="relative group p-1.5 rounded-3xl bg-white/5 backdrop-blur-3xl border border-white/10 shadow-2xl"
-                            >
-                                <div className="grid grid-cols-9 gap-1 bg-stone-800/20 p-1.5 rounded-2xl overflow-hidden shadow-inner">
-                                    {grid.length > 0 && grid.map((row, rIndex) => (
-                                        row.map((cellValue, cIndex) => {
-                                            const isOriginal = originalString[rIndex * 9 + cIndex] !== "-";
+                            <div className="flex flex-col xl:flex-row gap-8 items-center xl:items-start w-full">
+                                {/* Board Container */}
+                                <motion.div
+                                    initial={{ opacity: 0, scale: 0.98 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    transition={{ delay: 0.2 }}
+                                    className="relative group p-1.5 rounded-3xl bg-white/5 backdrop-blur-3xl border border-white/10 shadow-2xl shrink-0"
+                                >
+                                    <div className="grid grid-cols-9 gap-1 bg-stone-800/20 p-1.5 rounded-2xl overflow-hidden shadow-inner">
+                                        {grid.length > 0 && grid.map((row, rIndex) => (
+                                            row.map((cellValue, cIndex) => {
+                                                const isOriginal = originalString[rIndex * 9 + cIndex] !== "-";
 
-                                            // 3x3 Block identification for thicker borders
-                                            const isRightEdge = (cIndex + 1) % 3 === 0 && cIndex !== 8;
-                                            const isBottomEdge = (rIndex + 1) % 3 === 0 && rIndex !== 8;
+                                                // 3x3 Block identification for thicker borders
+                                                const isRightEdge = (cIndex + 1) % 3 === 0 && cIndex !== 8;
+                                                const isBottomEdge = (rIndex + 1) % 3 === 0 && rIndex !== 8;
 
-                                            return (
-                                                <div
-                                                    key={`${rIndex}-${cIndex}`}
+                                                return (
+                                                    <div
+                                                        key={`${rIndex}-${cIndex}`}
+                                                        className={`
+                                                            aspect-square w-10 sm:w-12 md:w-14 flex items-center justify-center relative transition-all duration-300
+                                                            ${isRightEdge ? "mr-3" : ""}
+                                                            ${isBottomEdge ? "mb-3" : ""}
+                                                        `}
+                                                    >
+                                                        {/* Input container remains here */}
+                                                        <input
+                                                            type="text"
+                                                            inputMode="numeric"
+                                                            maxLength={1}
+                                                            value={cellValue}
+                                                            onChange={(e) => handleCellChange(rIndex, cIndex, e.target.value)}
+                                                            readOnly={isOriginal}
+                                                            className={`
+                                                                w-full h-full text-center text-xl sm:text-2xl font-bold rounded-lg outline-none transition-all duration-200
+                                                                ${isOriginal
+                                                                    ? "bg-transparent text-slate-500 cursor-not-allowed font-black"
+                                                                    : "bg-white/5 text-orange-400 hover:bg-orange-500/10 focus:bg-orange-500/20 focus:text-white caret-orange-500"
+                                                                }
+                                                            `}
+                                                        />
+
+                                                        {/* Centered Boundary Lines */}
+                                                        {isRightEdge && (
+                                                            <div className="absolute -right-[10px] top-0 w-px h-full bg-white/20 pointer-events-none" />
+                                                        )}
+                                                        {isBottomEdge && (
+                                                            <div className="absolute -bottom-[10px] left-0 w-full h-px bg-white/20 pointer-events-none" />
+                                                        )}
+
+                                                        {isOriginal && (
+                                                            <div className="absolute top-1 right-1 w-1 h-1 rounded-full bg-slate-600 opacity-30" />
+                                                        )}
+                                                    </div>
+                                                );
+                                            })
+                                        ))}
+                                    </div>
+                                </motion.div>
+
+                                {/* Repositioned Utility Bar (Controls) */}
+                                <div className="p-6 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-xl w-full max-w-[320px]">
+                                    <h3 className="text-white font-bold mb-4 flex items-center gap-2">
+                                        <RefreshCcw size={16} className="text-orange-500" />
+                                        <span>{t.sudoku.controls}</span>
+                                    </h3>
+                                    <div className="flex flex-col gap-3">
+                                        <div className="grid grid-cols-2 gap-3">
+                                            <button
+                                                onClick={handleReset}
+                                                className="py-3 px-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 transition-all flex items-center justify-center gap-2 text-slate-300 text-sm font-medium"
+                                            >
+                                                <RefreshCcw size={14} />
+                                                <span>{t.sudoku.resetBtn}</span>
+                                            </button>
+                                            <button
+                                                onClick={handleUndo}
+                                                disabled={history.length === 0}
+                                                className="py-3 px-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 transition-all flex items-center justify-center gap-2 text-slate-300 text-sm font-medium disabled:opacity-30 disabled:cursor-not-allowed"
+                                            >
+                                                <Undo2 size={14} />
+                                                <span>{t.sudoku.undoBtn}</span>
+                                            </button>
+                                        </div>
+                                        <button
+                                            onClick={handleVerify}
+                                            disabled={isVerifying}
+                                            className="w-full py-3 px-4 rounded-xl bg-orange-600 hover:bg-orange-500 transition-all flex items-center justify-center gap-2 text-white text-sm font-bold shadow-lg shadow-orange-600/20 disabled:opacity-50 group overflow-hidden relative"
+                                        >
+                                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+                                            {isVerifying ? <Loader2 size={16} className="animate-spin" /> : <CheckCircle2 size={16} />}
+                                            <span className="relative z-10">{isVerifying ? t.sudoku.processing : t.sudoku.verifyBtn}</span>
+                                        </button>
+                                    </div>
+                                    <div className="mt-6">
+                                        <p className="text-[10px] text-slate-500 uppercase tracking-widest font-mono mb-2">{t.sudoku.levelSelection}</p>
+                                        <div className="flex flex-col gap-2">
+                                            {(['easy', 'medium', 'hard'] as const).map((lv) => (
+                                                <button
+                                                    key={lv}
+                                                    onClick={() => {
+                                                        setDifficulty(lv);
+                                                        generateNewPuzzle(date, lv);
+                                                    }}
                                                     className={`
-                                                        aspect-square w-10 sm:w-12 md:w-14 flex items-center justify-center relative transition-all duration-300
-                                                        ${isRightEdge ? "mr-1" : ""}
-                                                        ${isBottomEdge ? "mb-1" : ""}
+                                                        w-full py-2 rounded-lg text-xs font-bold uppercase tracking-wider border transition-all
+                                                        ${difficulty === lv
+                                                            ? "bg-orange-500 border-orange-400 text-white shadow-lg shadow-orange-500/20"
+                                                            : "bg-white/5 border-white/5 text-slate-500 hover:text-slate-300"
+                                                        }
                                                     `}
                                                 >
-                                                    <input
-                                                        type="text"
-                                                        inputMode="numeric"
-                                                        maxLength={1}
-                                                        value={cellValue}
-                                                        onChange={(e) => handleCellChange(rIndex, cIndex, e.target.value)}
-                                                        readOnly={isOriginal}
-                                                        className={`
-                                                            w-full h-full text-center text-xl sm:text-2xl font-bold rounded-lg outline-none transition-all duration-200
-                                                            ${isOriginal
-                                                                ? "bg-transparent text-slate-500 cursor-not-allowed font-black"
-                                                                : "bg-white/5 text-orange-400 hover:bg-orange-500/10 focus:bg-orange-500/20 focus:text-white caret-orange-500"
-                                                            }
-                                                        `}
-                                                    />
-                                                    {isOriginal && (
-                                                        <div className="absolute top-1 right-1 w-1 h-1 rounded-full bg-slate-600 opacity-30" />
-                                                    )}
-                                                </div>
-                                            );
-                                        })
-                                    ))}
-                                </div>
-                            </motion.div>
-                        </div>
-
-                        {/* Controls & AI Column */}
-                        <div className="flex flex-col gap-8 w-full">
-                            {/* Utility Bar */}
-                            <div className="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-xl">
-                                <h3 className="text-white font-bold mb-4 flex items-center gap-2">
-                                    <RefreshCcw size={16} className="text-orange-500" />
-                                    <span>{t.sudoku.controls}</span>
-                                </h3>
-                                <div className="grid grid-cols-2 gap-3">
-                                    <button
-                                        onClick={() => generateNewPuzzle(date, difficulty)}
-                                        className="py-3 px-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 transition-all flex items-center justify-center gap-2 text-slate-300 text-sm font-medium"
-                                    >
-                                        <RefreshCcw size={14} />
-                                        <span>{t.sudoku.resetBtn}</span>
-                                    </button>
-                                    <button
-                                        onClick={handleVerify}
-                                        disabled={isVerifying}
-                                        className="py-3 px-4 rounded-xl bg-orange-600 hover:bg-orange-500 transition-all flex items-center justify-center gap-2 text-white text-sm font-bold shadow-lg shadow-orange-600/20 disabled:opacity-50 group overflow-hidden relative"
-                                    >
-                                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-                                        {isVerifying ? <Loader2 size={16} className="animate-spin" /> : <CheckCircle2 size={16} />}
-                                        <span className="relative z-10">{isVerifying ? t.sudoku.processing : t.sudoku.verifyBtn}</span>
-                                    </button>
-                                </div>
-                                <div className="mt-6">
-                                    <p className="text-[10px] text-slate-500 uppercase tracking-widest font-mono mb-2">{t.sudoku.levelSelection}</p>
-                                    <div className="flex gap-2">
-                                        {(['easy', 'medium', 'hard'] as const).map((lv) => (
-                                            <button
-                                                key={lv}
-                                                onClick={() => {
-                                                    setDifficulty(lv);
-                                                    generateNewPuzzle(date, lv);
-                                                }}
-                                                className={`
-                                                    flex-1 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-wider border transition-all
-                                                    ${difficulty === lv
-                                                        ? "bg-orange-500 border-orange-400 text-white shadow-lg shadow-orange-500/20"
-                                                        : "bg-white/5 border-white/5 text-slate-500 hover:text-slate-300"
-                                                    }
-                                                `}
-                                            >
-                                                {lv === 'easy' ? t.sudoku.easy : lv === 'medium' ? t.sudoku.medium : t.sudoku.hard}
-                                            </button>
-                                        ))}
+                                                    {lv === 'easy' ? t.sudoku.easy : lv === 'medium' ? t.sudoku.medium : t.sudoku.hard}
+                                                </button>
+                                            ))}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                        </div>
+
+                        {/* AI Column */}
+                        <div className="flex flex-col gap-8 w-full lg:pt-32">
 
                             {/* AI Verdict Box */}
                             <AnimatePresence>

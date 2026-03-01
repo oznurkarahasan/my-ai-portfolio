@@ -135,12 +135,13 @@ export const portfolioData = {
             thinking: "Processing..."
         },
         sudoku: {
-            title: "AI SUDOKU",
-            subtitle: "Refresh your mind. Solve the puzzle and get it analyzed by Gemini 1.5 Flash.",
+            title: "SUDOKU",
+            subtitle: "I love puzzle games. Let's play!",
             challengeTitle: "Daily Challenge",
             controls: "Controls",
             backButton: "Back",
             resetBtn: "Reset",
+            undoBtn: "Undo",
             verifyBtn: "Verify",
             processing: "Processing",
             difficulty: "Difficulty",
@@ -283,12 +284,13 @@ export const portfolioData = {
             thinking: "Düşünüyor..."
         },
         sudoku: {
-            title: "AI SUDOKU",
-            subtitle: "Zihnini tazele. Bulmacayı çöz ve çözümünü Gemini 1.5 Flash tarafından analiz ettir.",
+            title: "SUDOKU",
+            subtitle: "Puzzle oyunları seviyorum. Hadi oynayalım!",
             challengeTitle: "Günlük Challenge",
             controls: "Kontroller",
             backButton: "Geri Dön",
             resetBtn: "Sıfırla",
+            undoBtn: "Geri Al",
             verifyBtn: "Doğrula",
             processing: "İşleniyor",
             difficulty: "Zorluk",
