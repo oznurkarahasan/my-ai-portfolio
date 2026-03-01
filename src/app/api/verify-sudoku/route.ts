@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
     try {
-        const { originalPuzzle, userGrid, date } = await req.json();
+        const { originalPuzzle, userGrid, date, language } = await req.json();
         const apiKey = process.env.GEMINI_API_KEY;
 
         if (!apiKey) {
@@ -28,7 +28,7 @@ If the solution is fully correct: Let them know they solved it perfectly and con
 If the solution is partially wrong: Let them know gently, point out roughly where the mistake is (e.g. "There is a duplicate number in the 3rd row" or "A 3x3 box has conflicting numbers"), and encourage them to keep trying.
 If there are empty spaces: Let them know the puzzle is not finished yet.
 
-Reply in Turkish since this is a Turkish requested feature. Keep it natural, geeky-friendly, and slightly encouraging! Give the final verdict clearly. Do not reveal the exact full solution!`;
+Reply in ${language === 'tr' ? 'Turkish' : 'English'} as per the user's current site language. Keep it natural, geeky-friendly, and slightly encouraging! Give the final verdict clearly. Do not reveal the exact full solution!`;
 
         const result = await model.generateContent(prompt);
         const text = result.response.text();

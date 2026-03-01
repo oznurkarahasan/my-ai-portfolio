@@ -133,6 +133,24 @@ export const portfolioData = {
             initialMessage: "Hi! I'm Olric. The AI Assistant. Ask me about my projects like 'Danilo' or my experience with Flutter and IoT.",
             placeholder: "Ask about the projects...",
             thinking: "Processing..."
+        },
+        sudoku: {
+            title: "AI SUDOKU",
+            subtitle: "Refresh your mind. Solve the puzzle and get it analyzed by Gemini 1.5 Flash.",
+            challengeTitle: "Daily Challenge",
+            controls: "Controls",
+            backButton: "Back",
+            resetBtn: "Reset",
+            verifyBtn: "Verify",
+            processing: "Processing",
+            difficulty: "Difficulty",
+            easy: "Easy",
+            medium: "Medium",
+            hard: "Hard",
+            levelSelection: "Level Selection",
+            aiTitle: "AI FEEDBACK",
+            aiWaiting: "Waiting for your solution...",
+            error: "An error occurred. Please try again."
         }
     },
     tr: {
@@ -263,6 +281,24 @@ export const portfolioData = {
             initialMessage: "Merhaba! Ben Olric. Yapay Zeka Asistanı. Bana 'Danilo' projesini, Flutter deneyimimi veya gömülü sistem projelerimi sorabilirsin.",
             placeholder: "Projeler hakkında sor...",
             thinking: "Düşünüyor..."
+        },
+        sudoku: {
+            title: "AI SUDOKU",
+            subtitle: "Zihnini tazele. Bulmacayı çöz ve çözümünü Gemini 1.5 Flash tarafından analiz ettir.",
+            challengeTitle: "Günlük Challenge",
+            controls: "Kontroller",
+            backButton: "Geri Dön",
+            resetBtn: "Sıfırla",
+            verifyBtn: "Doğrula",
+            processing: "İşleniyor",
+            difficulty: "Zorluk",
+            easy: "Kolay",
+            medium: "Orta",
+            hard: "Zor",
+            levelSelection: "Seviye Seçimi",
+            aiTitle: "AI FEEDBACK",
+            aiWaiting: "Çözümünü bekliyorum...",
+            error: "Sistemde bir hata oluştu. Lütfen tekrar deneyin."
         }
     },
     skills: [
