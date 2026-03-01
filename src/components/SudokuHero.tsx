@@ -10,7 +10,8 @@ import {
     ArrowLeft,
     CheckCircle2,
     AlertCircle,
-    Undo2
+    Undo2,
+    Sun
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -327,17 +328,17 @@ export function SudokuHero({ onBack }: SudokuHeroProps) {
                                         <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-rose-600 rounded-3xl blur opacity-20" />
                                         <div className="relative p-8 rounded-3xl bg-stone-900/90 border border-white/10 backdrop-blur-3xl overflow-hidden shadow-2xl">
                                             <div className="absolute top-0 right-0 p-4 opacity-10">
-                                                <BrainCircuit size={64} className="rotate-12" />
+                                                <Sun size={64} className="rotate-12" />
                                             </div>
 
                                             <div className="flex items-center gap-3 text-white font-black mb-4 uppercase tracking-tighter text-xl">
                                                 <div className="p-1.5 rounded-lg bg-orange-500">
-                                                    <Sparkles size={18} className="text-white" />
+                                                    <Sun size={18} className="text-white animate-spin-slow" />
                                                 </div>
                                                 <span>{t.sudoku.aiTitle}</span>
                                             </div>
 
-                                            <div className="text-slate-200 leading-relaxed text-base font-light space-y-4 max-h-[300px] overflow-y-auto custom-scrollbar pr-2">
+                                            <div className="text-slate-200 leading-relaxed text-sm font-medium space-y-4 max-h-[300px] overflow-y-auto custom-scrollbar pr-2">
                                                 {aiResponse}
                                             </div>
                                         </div>
@@ -345,7 +346,7 @@ export function SudokuHero({ onBack }: SudokuHeroProps) {
                                 ) : (
                                     <div className="h-full min-h-[160px] flex flex-col items-center justify-center p-8 rounded-3xl border border-dashed border-white/10 opacity-30">
                                         <AlertCircle size={32} className="mb-3 text-slate-500" />
-                                        <p className="text-xs text-center font-mono uppercase tracking-[0.2em]">{t.sudoku.aiWaiting}</p>
+                                        <p className="text-xs text-center font-medium uppercase tracking-[0.2em] opacity-60">{t.sudoku.aiWaiting}</p>
                                     </div>
                                 )}
                             </AnimatePresence>
