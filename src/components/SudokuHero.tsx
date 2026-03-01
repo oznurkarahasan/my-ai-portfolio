@@ -26,9 +26,12 @@ interface SudokuHeroProps {
 export function SudokuHero({ onBack }: SudokuHeroProps) {
     const { t, language } = useLanguage();
     const [originalString, setOriginalString] = useState<string>("");
+    const [solutionString, setSolutionString] = useState<string>("");
     const [grid, setGrid] = useState<SudokuGrid>([]);
     const [history, setHistory] = useState<SudokuGrid[]>([]);
     const [isVerifying, setIsVerifying] = useState(false);
+    const [showSolution, setShowSolution] = useState(false);
+    const [tempUserGrid, setTempUserGrid] = useState<SudokuGrid | null>(null);
     const [aiResponse, setAiResponse] = useState<string | null>(null);
     const [date, setDate] = useState<string>("");
     const [difficulty, setDifficulty] = useState<"easy" | "medium" | "hard">("medium");
@@ -44,13 +47,17 @@ export function SudokuHero({ onBack }: SudokuHeroProps) {
         }
 
         setOriginalString(puzzleStr);
+        setSolutionString(puzzle.solution);
         setGrid(newGrid);
         setHistory([]);
         setAiResponse(null);
+        setShowSolution(false);
+        setTempUserGrid(null);
 
         localStorage.setItem("daily-sudoku", JSON.stringify({
             date: todayDate,
             original: puzzleStr,
+            solution: puzzle.solution,
             userGrid: newGrid,
             difficulty: diff
         }));
@@ -64,8 +71,10 @@ export function SudokuHero({ onBack }: SudokuHeroProps) {
         if (savedData) {
             try {
                 const parsed = JSON.parse(savedData);
-                if (parsed.date === today) {
+                // Ensure the solution is present in the saved data
+                if (parsed.date === today && parsed.solution) {
                     setOriginalString(parsed.original);
+                    setSolutionString(parsed.solution);
                     setGrid(parsed.userGrid);
                     setDifficulty(parsed.difficulty || "medium");
                     setHistory([]);
@@ -79,7 +88,7 @@ export function SudokuHero({ onBack }: SudokuHeroProps) {
     }, [generateNewPuzzle]);
 
     const handleCellChange = (rowIndex: number, colIndex: number, value: string) => {
-        if (!/^[1-9]?$/.test(value)) return;
+        if (!/^[1-9]?$/.test(value) || showSolution) return;
 
         // Save current state to history before changing
         setHistory(prev => [...prev, grid.map(row => [...row])]);
@@ -91,6 +100,7 @@ export function SudokuHero({ onBack }: SudokuHeroProps) {
         localStorage.setItem("daily-sudoku", JSON.stringify({
             date,
             original: originalString,
+            solution: solutionString,
             userGrid: newGrid,
             difficulty
         }));
@@ -106,6 +116,7 @@ export function SudokuHero({ onBack }: SudokuHeroProps) {
         localStorage.setItem("daily-sudoku", JSON.stringify({
             date,
             original: originalString,
+            solution: solutionString,
             userGrid: previousGrid,
             difficulty
         }));
@@ -121,10 +132,13 @@ export function SudokuHero({ onBack }: SudokuHeroProps) {
         setGrid(resetGrid);
         setHistory([]);
         setAiResponse(null);
+        setShowSolution(false);
+        setTempUserGrid(null);
 
         localStorage.setItem("daily-sudoku", JSON.stringify({
             date,
             original: originalString,
+            solution: solutionString,
             userGrid: resetGrid,
             difficulty
         }));
@@ -157,6 +171,30 @@ export function SudokuHero({ onBack }: SudokuHeroProps) {
             setAiResponse(t.sudoku.error);
         } finally {
             setIsVerifying(false);
+        }
+    };
+
+    const isGridFull = grid.every(row => row.every(cell => cell !== ""));
+
+    const handleShowAnswer = () => {
+        if (!solutionString) return;
+
+        if (showSolution) {
+            // Restore user grid
+            if (tempUserGrid) {
+                setGrid(tempUserGrid);
+            }
+            setShowSolution(false);
+            setTempUserGrid(null);
+        } else {
+            // Save current grid and show solution
+            setTempUserGrid(grid.map(row => [...row]));
+            const solvedGrid: string[][] = [];
+            for (let i = 0; i < 9; i++) {
+                solvedGrid.push(solutionString.slice(i * 9, i * 9 + 9).split(""));
+            }
+            setGrid(solvedGrid);
+            setShowSolution(true);
         }
     };
 
@@ -226,8 +264,11 @@ export function SudokuHero({ onBack }: SudokuHeroProps) {
                                                                 w-full h-full text-center text-xl sm:text-2xl font-bold rounded-lg outline-none transition-all duration-200
                                                                 ${isOriginal
                                                                     ? "bg-transparent text-slate-500 cursor-not-allowed font-black"
-                                                                    : "bg-white/5 text-orange-400 hover:bg-orange-500/10 focus:bg-orange-500/20 focus:text-white caret-orange-500"
+                                                                    : showSolution
+                                                                        ? "bg-orange-500/10 text-white font-bold"
+                                                                        : "bg-white/5 text-orange-400 hover:bg-orange-500/10 focus:bg-orange-500/20 focus:text-white caret-orange-500"
                                                                 }
+                                                                ${showSolution ? "cursor-not-allowed" : ""}
                                                             `}
                                                         />
 
@@ -281,6 +322,27 @@ export function SudokuHero({ onBack }: SudokuHeroProps) {
                                             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
                                             {isVerifying ? <Loader2 size={16} className="animate-spin" /> : <CheckCircle2 size={16} />}
                                             <span className="relative z-10">{isVerifying ? t.sudoku.processing : t.sudoku.verifyBtn}</span>
+                                        </button>
+                                        <button
+                                            onClick={handleShowAnswer}
+                                            disabled={!isGridFull}
+                                            className={`
+                                                w-full py-3 px-4 rounded-xl transition-all flex items-center justify-center gap-2 text-sm font-bold border
+                                                ${!isGridFull
+                                                    ? "bg-white/5 border-white/5 text-slate-500 opacity-30 cursor-not-allowed"
+                                                    : showSolution
+                                                        ? "bg-orange-500 border-orange-400 text-white shadow-lg"
+                                                        : "bg-slate-800 hover:bg-slate-700 border-slate-700 text-slate-200 shadow-lg"
+                                                }
+                                            `}
+                                        >
+                                            <BrainCircuit size={16} />
+                                            <span>
+                                                {showSolution
+                                                    ? (t.sudoku.hideAnswer || (language === 'tr' ? 'Cevabı Gizle' : 'Hide Answer'))
+                                                    : (t.sudoku.showAnswer || (language === 'tr' ? 'Cevabı Göster' : 'Show Answer'))
+                                                }
+                                            </span>
                                         </button>
                                     </div>
                                     <div className="mt-6">

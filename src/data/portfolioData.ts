@@ -148,6 +148,9 @@ export const portfolioData = {
             medium: "Medium",
             hard: "Hard",
             levelSelection: "Level Selection",
+            showAnswer: "Show Answer",
+            hideAnswer: "Hide Answer",
+            subtitle: "Challenge your mind with our AI-powered daily Sudoku puzzle.",
             aiTitle: "AI FEEDBACK",
             aiWaiting: "Waiting for your solution...",
             error: "An error occurred. Please try again."
@@ -296,6 +299,9 @@ export const portfolioData = {
             medium: "Orta",
             hard: "Zor",
             levelSelection: "Seviye Seçimi",
+            showAnswer: "Cevabı Göster",
+            hideAnswer: "Cevabı Gizle",
+            subtitle: "Yapay zeka destekli günlük Sudoku bulmacamızla zihninizi zorlayın.",
             aiTitle: "AI FEEDBACK",
             aiWaiting: "Çözümünü bekliyorum...",
             error: "Sistemde bir hata oluştu. Lütfen tekrar deneyin."
