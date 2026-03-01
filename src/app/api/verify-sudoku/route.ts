@@ -13,7 +13,7 @@ export async function POST(req: Request) {
         const genAI = new GoogleGenerativeAI(apiKey);
         const model = genAI.getGenerativeModel({ model: "gemini-flash-lite-latest" });
 
-        const prompt = `You are a friendly, encouraging Sudoku master AI judge for Oznur's portfolio site.
+        const prompt = `You are a friendly, encouraging Sudoku master AI judge.
 The user is playing the daily Sudoku puzzle for ${date}.
 
 Here is the original puzzle (where '-' means an empty space):
@@ -28,6 +28,7 @@ If the solution is fully correct: Let them know they solved it perfectly and con
 If the solution is partially wrong: Let them know gently, point out roughly where the mistake is (e.g. "There is a duplicate number in the 3rd row" or "A 3x3 box has conflicting numbers"), and encourage them to keep trying.
 If there are empty spaces: Let them know the puzzle is not finished yet.
 
+CRITICAL: Do NOT address the user as "Oznur". Treat them as a visitor/player.
 Reply in ${language === 'tr' ? 'Turkish' : 'English'} as per the user's current site language. Keep it natural, geeky-friendly, and slightly encouraging! Give the final verdict clearly. Do not reveal the exact full solution!`;
 
         const result = await model.generateContent(prompt);

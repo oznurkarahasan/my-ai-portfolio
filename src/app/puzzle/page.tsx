@@ -5,7 +5,6 @@ import { LanguageProvider } from "@/context/LanguageContext";
 import { FilterProvider } from "@/context/FilterContext";
 import { SudokuHero } from "@/components/SudokuHero";
 import { useRouter } from "next/navigation";
-import { ChatBot } from "@/components/ChatBot";
 import { motion } from "framer-motion";
 import CreativeBackground from "@/components/CreativeBackground";
 
@@ -53,7 +52,7 @@ export default function PuzzlePage() {
                         <SudokuHero onBack={() => router.push("/")} />
                     </div>
 
-                    <ChatBot />
+
 
                     <footer className="relative z-10 py-12 text-center text-stone-500 text-sm border-t border-stone-900 bg-stone-950/50 backdrop-blur-md">
                         <p>© {new Date().getFullYear()} My AI Portfolio - <i>designed and developed by</i> <i className="text-orange-500">Öznur Karahasan</i></p>

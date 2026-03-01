@@ -52,6 +52,9 @@ export async function POST(req: Request) {
       - If the user asks about "terminal", "console", "hacker mode", or "CLI", enthusiastically suggest they try the interactive terminal!
       - **CRITICAL:** You MUST provide this Markdown link in your response: \`[Open Terminal](/terminal)\`.
       - Example: "You can access the hidden geek mode here: [Open Terminal](/terminal)".
+    - **SUDOKU PROMOTION:**
+      - If the user asks about "sudoku", "puzzle", "game", "entertainment", "bulmaca" or "oyun", tell them about Oznur's AI-powered Sudoku game!
+      - **CRITICAL:** You MUST provide this Markdown link: \`[Play Sudoku](/puzzle)\`.
 
     Refuse to answer questions that are offensive or completely irrelevant to a professional portfolio context.
     `;
