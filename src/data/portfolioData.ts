@@ -136,7 +136,6 @@ export const portfolioData = {
         },
         sudoku: {
             title: "SUDOKU",
-            subtitle: "I love puzzle games. Let's play!",
             challengeTitle: "Daily Challenge",
             controls: "Controls",
             backButton: "Back",
@@ -285,7 +284,6 @@ export const portfolioData = {
         },
         sudoku: {
             title: "SUDOKU",
-            subtitle: "Puzzle oyunları seviyorum. Hadi oynayalım!",
             challengeTitle: "Günlük Challenge",
             controls: "Kontroller",
             backButton: "Geri Dön",

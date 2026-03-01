@@ -184,11 +184,8 @@ export function SudokuHero({ onBack }: SudokuHeroProps) {
                                     <span>{t.sudoku.challengeTitle}</span>
                                 </motion.div>
                                 <h1 className="text-4xl md:text-6xl font-black text-white mb-4 tracking-tighter leading-none">
-                                    {t.sudoku.title}<span className="text-orange-500">.</span>
+                                    {t.sudoku.title}
                                 </h1>
-                                <p className="text-slate-400 text-lg font-light leading-relaxed max-w-lg">
-                                    {t.sudoku.subtitle}
-                                </p>
                             </div>
 
                             <div className="flex flex-col xl:flex-row gap-8 items-center xl:items-start w-full">
