@@ -199,7 +199,7 @@ export function SudokuHero({ onBack }: SudokuHeroProps) {
     };
 
     return (
-        <section className="min-h-screen flex items-center justify-center pt-28 pb-20 relative px-6">
+        <section className="min-h-screen flex items-center justify-center pt-28 pb-20 relative px-4 sm:px-6">
             <div className="container mx-auto z-10">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -232,9 +232,9 @@ export function SudokuHero({ onBack }: SudokuHeroProps) {
                                     initial={{ opacity: 0, scale: 0.98 }}
                                     animate={{ opacity: 1, scale: 1 }}
                                     transition={{ delay: 0.2 }}
-                                    className="relative group p-1.5 rounded-3xl bg-white/5 backdrop-blur-3xl border border-white/10 shadow-2xl shrink-0"
+                                    className="relative group p-1 sm:p-1.5 rounded-3xl bg-white/5 backdrop-blur-3xl border border-white/10 shadow-2xl shrink-0"
                                 >
-                                    <div className="grid grid-cols-9 gap-1 bg-stone-800/20 p-1.5 rounded-2xl overflow-hidden shadow-inner">
+                                    <div className="grid grid-cols-9 gap-1 bg-stone-800/20 p-1 sm:p-1.5 rounded-2xl overflow-hidden shadow-inner">
                                         {grid.length > 0 && grid.map((row, rIndex) => (
                                             row.map((cellValue, cIndex) => {
                                                 const isOriginal = originalString[rIndex * 9 + cIndex] !== "-";
@@ -247,9 +247,9 @@ export function SudokuHero({ onBack }: SudokuHeroProps) {
                                                     <div
                                                         key={`${rIndex}-${cIndex}`}
                                                         className={`
-                                                            aspect-square w-10 sm:w-12 md:w-14 flex items-center justify-center relative transition-all duration-300
-                                                            ${isRightEdge ? "mr-3" : ""}
-                                                            ${isBottomEdge ? "mb-3" : ""}
+                                                            aspect-square w-8 sm:w-10 md:w-12 lg:w-14 flex items-center justify-center relative transition-all duration-300
+                                                            ${isRightEdge ? "mr-2 sm:mr-3" : ""}
+                                                            ${isBottomEdge ? "mb-2 sm:mb-3" : ""}
                                                         `}
                                                     >
                                                         {/* Input container remains here */}
@@ -261,7 +261,7 @@ export function SudokuHero({ onBack }: SudokuHeroProps) {
                                                             onChange={(e) => handleCellChange(rIndex, cIndex, e.target.value)}
                                                             readOnly={isOriginal}
                                                             className={`
-                                                                w-full h-full text-center text-xl sm:text-2xl font-bold rounded-lg outline-none transition-all duration-200
+                                                                w-full h-full text-center text-lg sm:text-2xl font-bold rounded-lg outline-none transition-all duration-200
                                                                 ${isOriginal
                                                                     ? "bg-transparent text-slate-500 cursor-not-allowed font-black"
                                                                     : showSolution
@@ -274,10 +274,10 @@ export function SudokuHero({ onBack }: SudokuHeroProps) {
 
                                                         {/* Centered Boundary Lines */}
                                                         {isRightEdge && (
-                                                            <div className="absolute -right-[10px] top-0 w-px h-full bg-white/20 pointer-events-none" />
+                                                            <div className="absolute -right-[6px] sm:-right-[8px] top-0 w-px h-full bg-white/20 pointer-events-none" />
                                                         )}
                                                         {isBottomEdge && (
-                                                            <div className="absolute -bottom-[10px] left-0 w-full h-px bg-white/20 pointer-events-none" />
+                                                            <div className="absolute -bottom-[6px] sm:-bottom-[8px] left-0 w-full h-px bg-white/20 pointer-events-none" />
                                                         )}
 
                                                         {isOriginal && (
