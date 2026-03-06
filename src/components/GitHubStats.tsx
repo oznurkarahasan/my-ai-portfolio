@@ -140,7 +140,7 @@ export function GitHubStats() {
                             <div className="min-w-max px-2 md:px-0 flex justify-center">
                                 <GitHubCalendar
                                     username={username}
-                                    renderColorLegend={() => <g />}
+                                    renderColorLegend={() => <></>}
                                     labels={{
                                         legend: {
                                             less: '',
