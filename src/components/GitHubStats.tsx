@@ -140,13 +140,37 @@ export function GitHubStats() {
                             <div className="min-w-max px-2 md:px-0 flex justify-center">
                                 <GitHubCalendar
                                     username={username}
+                                    renderColorLegend={() => <g />}
+                                    labels={{
+                                        legend: {
+                                            less: '',
+                                            more: ''
+                                        }
+                                    }}
                                     blockSize={isMobile ? 11 : 14}
                                     blockMargin={5}
                                     fontSize={13}
                                     theme={{
                                         light: ['#1c1917', '#ea580c'],
-                                        // Level 0 to 4: Dark Gray -> Light Orange -> Deep Orange
                                         dark: ['#1c1917', '#452109', '#7c3a0a', '#ea580c', '#f97316'],
+                                    }}
+                                    renderBlock={(block, activity) => {
+                                        // Filter out potential conflicts with Framer Motion props
+                                        const { onAnimationStart, onDragStart, onDragEnd, onDrag, ...safeProps } = block.props as any;
+                                        return (
+                                            <motion.rect
+                                                {...safeProps}
+                                                initial={{ scale: 0, opacity: 0 }}
+                                                animate={{ scale: 1, opacity: 1 }}
+                                                whileHover={{ scale: 1.2, stroke: '#f97316', strokeWidth: 1 }}
+                                                transition={{
+                                                    type: "spring",
+                                                    stiffness: 300,
+                                                    damping: 20,
+                                                    delay: Math.random() * 0.8 // Dynamic staggered entrance
+                                                }}
+                                            />
+                                        );
                                     }}
                                     style={{
                                         color: '#78716c',
