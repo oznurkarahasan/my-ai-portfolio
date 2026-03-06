@@ -2,6 +2,7 @@
 
 import { useLanguage } from "@/context/LanguageContext";
 import { portfolioData } from "@/data/portfolioData";
+import { Sun } from "lucide-react";
 import { motion } from "framer-motion";
 import { useFilter } from "@/context/FilterContext";
 import { GitHubStats } from "./GitHubStats";
@@ -34,7 +35,7 @@ export function About() {
                     className="max-w-6xl mx-auto"
                 >
                     <h2 className="text-3xl font-bold text-white mb-8 flex items-center gap-3">
-                        <span className="w-12 h-1 bg-orange-500 rounded-full"></span>
+                        <Sun size={32} className="text-orange-500" />
                         {t.about.title}
                     </h2>
                     <div className="grid md:grid-cols-2 gap-12">

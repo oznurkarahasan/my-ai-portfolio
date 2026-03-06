@@ -161,10 +161,10 @@ export function ChatBot() {
                         initial={{ opacity: 0, y: 20, scale: 0.95 }}
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 20, scale: 0.95 }}
-                        className="fixed bottom-24 right-6 w-full max-w-[350px] sm:max-w-[400px] h-[500px] bg-stone-900/50 backdrop-blur-md border border-stone-700/30 rounded-2xl shadow-2xl flex flex-col overflow-hidden z-50"
+                        className="fixed bottom-24 right-6 w-full max-w-[350px] sm:max-w-[400px] h-[500px] bg-stone-900/90 backdrop-blur-md border border-stone-700/30 rounded-2xl shadow-2xl flex flex-col overflow-hidden z-50"
                     >
                         {/* Header */}
-                        <div className="p-4 bg-stone-800/50 backdrop-blur-sm border-b border-stone-700/30 flex items-center gap-3">
+                        <div className="p-4 bg-stone-800/80 backdrop-blur-sm border-b border-stone-700/30 flex items-center gap-3">
                             <div className="w-10 h-10 flex items-center justify-center">
                                 <Sun size={24} className="text-orange-500" />
                             </div>
@@ -184,7 +184,7 @@ export function ChatBot() {
                                     <div
                                         className={`max-w-[80%] rounded-2xl p-3 text-sm ${msg.role === "user"
                                             ? "bg-orange-600 text-white rounded-tr-none"
-                                            : "bg-stone-800/50 backdrop-blur-sm text-stone-200 rounded-tl-none border border-stone-700/30"
+                                            : "bg-stone-800/80 backdrop-blur-sm text-stone-200 rounded-tl-none border border-stone-700/30"
                                             }`}
                                     >
                                         {msg.role === "model" ? (
@@ -211,7 +211,7 @@ export function ChatBot() {
                         {/* Input Area */}
                         <form
                             onSubmit={handleSubmit}
-                            className="p-4 bg-stone-800/50 backdrop-blur-sm border-t border-stone-700/30"
+                            className="p-4 bg-stone-800/80 backdrop-blur-sm border-t border-stone-700/30"
                         >
                             <div className="relative">
                                 <input

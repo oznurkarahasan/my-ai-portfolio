@@ -1,9 +1,10 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 import { useLanguage } from "@/context/LanguageContext";
 import { motion } from "framer-motion";
-import { BookOpen, ExternalLink, Loader2 } from "lucide-react";
+import { BookOpen, ExternalLink, Loader2, ArrowRight } from "lucide-react";
 
 interface BlogPost {
     slug: string;
@@ -69,7 +70,7 @@ export function Blog() {
                         viewport={{ once: true }}
                         className="text-3xl font-bold text-white mb-12 flex items-center gap-3"
                     >
-                        <span className="w-12 h-1 bg-orange-500 rounded-full"></span>
+                        <BookOpen size={32} className="text-orange-500" />
                         {t.blog.title}
                     </motion.h2>
 
@@ -101,30 +102,50 @@ export function Blog() {
                                         whileInView={{ opacity: 1, x: 0 }}
                                         viewport={{ once: true }}
                                         transition={{ delay: index * 0.1 }}
-                                        className="group flex-shrink-0 w-[280px] sm:w-[320px] md:w-[350px] p-6 bg-stone-900 border border-stone-800 rounded-2xl hover:border-orange-500/50 transition-all hover:-translate-y-1 snap-start"
+                                        className="group relative flex-shrink-0 w-[280px] sm:w-[320px] md:w-[350px] h-[480px] bg-stone-900/80 backdrop-blur-xl border border-stone-800/50 rounded-3xl overflow-hidden hover:border-orange-500/30 transition-all duration-500 hover:-translate-y-2 snap-start flex flex-col"
                                     >
-                                        <div className="flex items-start justify-between mb-4">
-                                            <div className="p-3 bg-stone-800 rounded-lg group-hover:bg-orange-500/10 transition-colors">
-                                                <BookOpen size={24} className="text-orange-500" />
+                                        {/* Image Header */}
+                                        <div className="relative h-48 w-full overflow-hidden bg-stone-800">
+                                            {/* Default Background Gradient as Fallback */}
+                                            <div className="absolute inset-0 bg-gradient-to-br from-orange-500/20 to-stone-900 group-hover:scale-110 transition-transform duration-700" />
+
+                                            <Image
+                                                src={`/posts/docs/${post.slug}.png`}
+                                                alt={post.title}
+                                                fill
+                                                unoptimized
+                                                className="object-cover group-hover:scale-110 transition-transform duration-500"
+                                                loading="lazy"
+                                            />
+
+                                            {/* Overlay Gradient for Text Readability */}
+                                            <div className="absolute inset-0 bg-gradient-to-t from-stone-900 via-transparent to-transparent opacity-80" />
+                                        </div>
+
+                                        <div className="relative p-7 flex-1 flex flex-col z-10">
+                                            {/* Content */}
+                                            <h3 className="text-xl font-bold text-white mb-3 group-hover:text-orange-400 transition-colors line-clamp-2 leading-snug">
+                                                {post.title}
+                                            </h3>
+
+                                            <p className="text-stone-400 text-sm leading-relaxed mb-6 line-clamp-4 font-medium">
+                                                {post.summary}
+                                            </p>
+
+                                            {/* Footer */}
+                                            <div className="mt-auto pt-5 border-t border-stone-800/50 flex items-center justify-between">
+                                                <span className="text-xs font-bold text-orange-500 uppercase tracking-[0.1em] flex items-center gap-2 group/link">
+                                                    {t.blog.readMore}
+                                                    <ArrowRight size={14} className="group-hover/link:translate-x-1 transition-transform" />
+                                                </span>
+                                                {post.link && (
+                                                    <ExternalLink size={16} className="text-stone-600 group-hover:text-orange-400 transition-colors" />
+                                                )}
                                             </div>
-                                            {post.link && (
-                                                <ExternalLink size={20} className="text-stone-600 group-hover:text-orange-400 transition-colors" />
-                                            )}
                                         </div>
 
-                                        <h3 className="text-xl font-bold text-white mb-3 group-hover:text-orange-400 transition-colors line-clamp-2">
-                                            {post.title}
-                                        </h3>
-
-                                        <p className="text-stone-400 text-sm leading-relaxed mb-6 line-clamp-3">
-                                            {post.summary}
-                                        </p>
-
-                                        <div className="mt-auto pt-4 border-t border-stone-800">
-                                            <span className="text-xs font-medium text-orange-500 uppercase tracking-wider group-hover:underline">
-                                                {t.blog.readMore}
-                                            </span>
-                                        </div>
+                                        {/* Bottom Progress Accent */}
+                                        <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-gradient-to-r from-transparent via-orange-500 to-transparent group-hover:w-full transition-all duration-1000 origin-center" />
                                     </motion.a>
                                 ))}
                             </div>
@@ -135,3 +156,4 @@ export function Blog() {
         </section>
     );
 }
+

@@ -107,7 +107,7 @@ export function GitHubStats() {
                 {/* Subtle Glow */}
                 <div className="absolute -inset-1 bg-gradient-to-r from-orange-500/5 to-transparent rounded-3xl blur-xl opacity-20 group-hover:opacity-30 transition duration-1000"></div>
 
-                <div className="relative bg-stone-900/40 backdrop-blur-md border border-stone-800 rounded-3xl p-6 md:p-10 shadow-2xl">
+                <div className="relative bg-stone-900/80 backdrop-blur-md border border-stone-800 rounded-3xl p-6 md:p-10 shadow-2xl">
 
                     {/* Header Info */}
                     <div className="flex items-center justify-between mb-8">
