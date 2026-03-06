@@ -8,6 +8,15 @@ export const portfolioData = {
             github: "https://github.com/oznurkarahasan",
             linkedin: "https://linkedin.com/in/oznurkarahasan",
             medium: "https://medium.com/@oznurkarahasann"
+        },
+        githubStats: {
+            username: "oznurkarahasan",
+            totalContributions: 482,
+            stars: 12,
+            forks: 8,
+            streak: 14,
+            level: 42,
+            nextLevelXp: 500
         }
     },
     en: {
