@@ -3,7 +3,7 @@
 import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
-import { Github, Star, GitBranch, Zap, Trophy, Flame } from "lucide-react";
+import { Github, ExternalLink } from "lucide-react";
 import { useState, useEffect } from "react";
 
 const GitHubCalendar = dynamic(
@@ -16,6 +16,7 @@ export function GitHubStats() {
     const { language } = useLanguage();
     const [isMobile, setIsMobile] = useState(false);
     const username = portfolioData.personal.githubStats.username;
+    const githubUrl = portfolioData.personal.social.github;
 
     useEffect(() => {
         const checkMobile = () => setIsMobile(window.innerWidth < 768);
@@ -28,16 +29,18 @@ export function GitHubStats() {
         tr: {
             title: "GitHub Katkıları",
             subtitle: "Açık kaynak dünyasındaki dijital izlerim",
+            viewProfile: "Profili Görüntüle",
             disclaimer: "* Son 1 yıl içindeki geliştirme aktivitelerini yansıtmaktadır."
         },
         en: {
             title: "GitHub Contributions",
             subtitle: "My digital footprints in open source",
+            viewProfile: "View Profile",
             disclaimer: "* Reflects contribution activity from the past year."
         }
     }[language as 'tr' | 'en'] || {
-        tr: { title: "GitHub Katkıları", subtitle: "Dijital izlerim", disclaimer: "* Son 1 yılın verileri." },
-        en: { title: "GitHub Contributions", subtitle: "Digital footprints", disclaimer: "* Past year data." }
+        tr: { title: "GitHub Katkıları", subtitle: "Dijital izlerim", viewProfile: "Profil", disclaimer: "* Son 1 yılın verileri." },
+        en: { title: "GitHub Contributions", subtitle: "Digital footprints", viewProfile: "Profile", disclaimer: "* Past year data." }
     };
 
     const containerVariants = {
@@ -65,20 +68,35 @@ export function GitHubStats() {
             variants={containerVariants}
             className="mt-20 mb-12"
         >
-            {/* Simple Header Section */}
-            <div className="mb-10 text-center md:text-left">
-                <motion.h3
+            {/* Header Section with Integrated Link */}
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-10">
+                <div className="text-center md:text-left">
+                    <motion.h3
+                        variants={itemVariants}
+                        className="text-2xl md:text-3xl font-bold text-white flex items-center justify-center md:justify-start gap-3"
+                    >
+                        <div className="p-2 bg-orange-500/10 rounded-lg">
+                            <Github className="w-8 h-8 text-orange-500" />
+                        </div>
+                        {t.title}
+                    </motion.h3>
+                    <motion.p variants={itemVariants} className="mt-2 text-stone-400 max-w-2xl">
+                        {t.subtitle}
+                    </motion.p>
+                </div>
+
+                <motion.a
                     variants={itemVariants}
-                    className="text-2xl md:text-3xl font-bold text-white flex items-center justify-center md:justify-start gap-3"
+                    href={githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="flex items-center justify-center gap-2 px-6 py-3 bg-orange-500/10 hover:bg-orange-500 text-orange-500 hover:text-white border border-orange-500/20 hover:border-orange-500 rounded-2xl transition-all duration-300 font-bold group shadow-lg shadow-orange-500/5 hover:shadow-orange-500/20"
                 >
-                    <div className="p-2 bg-orange-500/10 rounded-lg">
-                        <Github className="w-8 h-8 text-orange-500" />
-                    </div>
-                    {t.title}
-                </motion.h3>
-                <motion.p variants={itemVariants} className="mt-2 text-stone-400 max-w-2xl">
-                    {t.subtitle}
-                </motion.p>
+                    {t.viewProfile}
+                    <ExternalLink className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                </motion.a>
             </div>
 
             {/* Calendar Card - Focused and Responsive */}
