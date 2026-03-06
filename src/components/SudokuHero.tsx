@@ -35,6 +35,8 @@ export function SudokuHero({ onBack }: SudokuHeroProps) {
     const [aiResponse, setAiResponse] = useState<string | null>(null);
     const [date, setDate] = useState<string>("");
     const [difficulty, setDifficulty] = useState<"easy" | "medium" | "hard">("medium");
+    const [activeCell, setActiveCell] = useState<{ r: number; c: number } | null>(null);
+    const [lastAction, setLastAction] = useState<{ r: number; c: number } | null>(null);
 
     const generateNewPuzzle = useCallback((todayDate: string, diff: "easy" | "medium" | "hard" = "medium") => {
         const puzzle = getSudoku(diff);
@@ -96,6 +98,10 @@ export function SudokuHero({ onBack }: SudokuHeroProps) {
         const newGrid = [...grid.map(row => [...row])];
         newGrid[rowIndex][colIndex] = value;
         setGrid(newGrid);
+        setLastAction({ r: rowIndex, c: colIndex });
+
+        // Reset last action after animation
+        setTimeout(() => setLastAction(null), 1000);
 
         localStorage.setItem("daily-sudoku", JSON.stringify({
             date,
@@ -199,7 +205,24 @@ export function SudokuHero({ onBack }: SudokuHeroProps) {
     };
 
     return (
-        <section className="min-h-screen flex items-center justify-center pt-28 pb-20 relative px-4 sm:px-6">
+        <section className="min-h-screen flex items-center justify-center pt-28 pb-20 relative px-4 sm:px-6 overflow-hidden">
+            {/* Neural Background Pattern */}
+            <div className="absolute inset-0 z-0 opacity-20 pointer-events-none">
+                <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <pattern id="neural-grid" width="100" height="100" patternUnits="userSpaceOnUse">
+                            <circle cx="2" cy="2" r="1" fill="rgba(249,115,22,0.3)" />
+                            <path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(255,255,255,0.03)" strokeWidth="0.5" />
+                        </pattern>
+                    </defs>
+                    <rect width="100%" height="100%" fill="url(#neural-grid)" />
+                </svg>
+            </div>
+
+            {/* Glowing Orbs */}
+            <div className="absolute top-1/4 -left-20 w-96 h-96 bg-orange-600/10 rounded-full blur-[120px] pointer-events-none" />
+            <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-rose-600/10 rounded-full blur-[120px] pointer-events-none" />
+
             <div className="container mx-auto z-10">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -234,12 +257,17 @@ export function SudokuHero({ onBack }: SudokuHeroProps) {
                                     transition={{ delay: 0.2 }}
                                     className="relative group p-1 sm:p-1.5 rounded-3xl bg-white/5 backdrop-blur-3xl border border-white/10 shadow-2xl shrink-0"
                                 >
-                                    <div className="grid grid-cols-9 gap-1 bg-stone-800/20 p-1 sm:p-1.5 rounded-2xl overflow-hidden shadow-inner">
+                                    <div className="grid grid-cols-9 gap-1 bg-stone-900/60 p-2 sm:p-3 rounded-2xl overflow-hidden relative shadow-[0_0_50px_rgba(0,0,0,0.5)] border border-white/5">
                                         {grid.length > 0 && grid.map((row, rIndex) => (
                                             row.map((cellValue, cIndex) => {
                                                 const isOriginal = originalString[rIndex * 9 + cIndex] !== "-";
+                                                const isActive = activeCell?.r === rIndex && activeCell?.c === cIndex;
+                                                const isRowConnected = activeCell?.r === rIndex;
+                                                const isColConnected = activeCell?.c === cIndex;
+                                                const isConnected = isRowConnected || isColConnected;
+                                                const isJustChanged = lastAction?.r === rIndex && lastAction?.c === cIndex;
 
-                                                // 3x3 Block identification for thicker borders
+                                                // 3x3 Block identification
                                                 const isRightEdge = (cIndex + 1) % 3 === 0 && cIndex !== 8;
                                                 const isBottomEdge = (rIndex + 1) % 3 === 0 && rIndex !== 8;
 
@@ -247,41 +275,71 @@ export function SudokuHero({ onBack }: SudokuHeroProps) {
                                                     <div
                                                         key={`${rIndex}-${cIndex}`}
                                                         className={`
-                                                            aspect-square w-8 sm:w-10 md:w-12 lg:w-14 flex items-center justify-center relative transition-all duration-300
-                                                            ${isRightEdge ? "mr-2 sm:mr-3" : ""}
-                                                            ${isBottomEdge ? "mb-2 sm:mb-3" : ""}
+                                                            aspect-square w-8 sm:w-10 md:w-12 lg:w-14 flex items-center justify-center relative transition-all duration-300 z-10
+                                                            ${isRightEdge ? "mr-1.5 sm:mr-2" : ""}
+                                                            ${isBottomEdge ? "mb-1.5 sm:mb-2" : ""}
                                                         `}
                                                     >
-                                                        {/* Input container remains here */}
+                                                        {/* Cell Interaction Wave */}
+                                                        {isJustChanged && (
+                                                            <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-30">
+                                                                <motion.div
+                                                                    initial={{ scale: 0.5, opacity: 1 }}
+                                                                    animate={{ scale: 4, opacity: 0 }}
+                                                                    transition={{ duration: 0.7, ease: "easeOut" }}
+                                                                    className="w-full h-full rounded-full bg-orange-500/40 blur-[2px]"
+                                                                />
+                                                            </div>
+                                                        )}
+
                                                         <input
                                                             type="text"
                                                             inputMode="numeric"
                                                             maxLength={1}
                                                             value={cellValue}
                                                             onChange={(e) => handleCellChange(rIndex, cIndex, e.target.value)}
-                                                            readOnly={isOriginal}
+                                                            onFocus={() => setActiveCell({ r: rIndex, c: cIndex })}
+                                                            onBlur={() => setActiveCell(null)}
+                                                            readOnly={isOriginal || showSolution}
                                                             className={`
-                                                                w-full h-full text-center text-lg sm:text-2xl font-bold rounded-lg outline-none transition-all duration-200
+                                                                w-full h-full text-center text-lg sm:text-2xl font-bold rounded-xl outline-none transition-all duration-300
                                                                 ${isOriginal
-                                                                    ? "bg-transparent text-slate-500 cursor-not-allowed font-black"
+                                                                    ? "bg-transparent text-slate-500/40 cursor-not-allowed font-black"
                                                                     : showSolution
-                                                                        ? "bg-orange-500/10 text-white font-bold"
-                                                                        : "bg-white/5 text-orange-400 hover:bg-orange-500/10 focus:bg-orange-500/20 focus:text-white caret-orange-500"
+                                                                        ? "bg-orange-600/20 text-white font-bold"
+                                                                        : isActive
+                                                                            ? "bg-orange-500 text-white shadow-[0_0_30px_rgba(249,115,22,0.6)] z-20 border-2 border-orange-400 scale-110"
+                                                                            : isConnected
+                                                                                ? "bg-orange-500/15 text-orange-400 border border-orange-500/20 backdrop-blur-[2px]"
+                                                                                : "bg-white/5 text-orange-400/80 hover:bg-orange-500/10 focus:bg-orange-500/20 border border-white/5"
                                                                 }
                                                                 ${showSolution ? "cursor-not-allowed" : ""}
+                                                                ${isRowConnected && !isActive ? "shadow-[inset_0_0_10px_rgba(249,115,22,0.1)]" : ""}
+                                                                ${isColConnected && !isActive ? "shadow-[inset_0_0_10px_rgba(249,115,22,0.1)]" : ""}
                                                             `}
                                                         />
 
-                                                        {/* Centered Boundary Lines */}
-                                                        {isRightEdge && (
-                                                            <div className="absolute -right-[6px] sm:-right-[8px] top-0 w-px h-full bg-white/20 pointer-events-none" />
-                                                        )}
-                                                        {isBottomEdge && (
-                                                            <div className="absolute -bottom-[6px] sm:-bottom-[8px] left-0 w-full h-px bg-white/20 pointer-events-none" />
+                                                        {/* Futuristic Node Markers */}
+                                                        {isOriginal && (
+                                                            <div className="absolute top-1 right-1">
+                                                                <div className="w-1 h-1 rounded-full bg-slate-500 animate-pulse" />
+                                                            </div>
                                                         )}
 
-                                                        {isOriginal && (
-                                                            <div className="absolute top-1 right-1 w-1 h-1 rounded-full bg-slate-600 opacity-30" />
+                                                        {/* Block Boundary Indicators (Neon Laser Lines) */}
+                                                        {isRightEdge && (
+                                                            <div className="absolute -right-[4px] sm:-right-[6px] top-0 bottom-0 w-[2px] pointer-events-none opacity-80">
+                                                                <div className="w-full h-full bg-orange-500/40 shadow-[0_0_8px_rgba(249,115,22,0.4)]" />
+                                                                {/* Dashed Overlay for "Data Link" look */}
+                                                                <div className="absolute inset-0 bg-[linear-gradient(to_bottom,transparent_30%,#1c1917_30%)] bg-[length:1px_8px]" />
+                                                            </div>
+                                                        )}
+                                                        {isBottomEdge && (
+                                                            <div className="absolute -bottom-[4px] sm:-bottom-[5px] left-0 right-0 h-[2px] pointer-events-none opacity-80">
+                                                                <div className="w-full h-full bg-orange-500/40 shadow-[0_0_8px_rgba(249,115,22,0.4)]" />
+                                                                {/* Dashed Overlay for "Data Link" look */}
+                                                                <div className="absolute inset-0 bg-[linear-gradient(to_right,transparent_30%,#1c1917_30%)] bg-[length:8px_1px]" />
+                                                            </div>
                                                         )}
                                                     </div>
                                                 );
