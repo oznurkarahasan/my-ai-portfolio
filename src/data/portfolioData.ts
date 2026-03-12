@@ -28,7 +28,7 @@ export const portfolioData = {
         about: {
             title: "About Me",
             bio: "I am a developer who loves bridging the gap between software and the physical world. I specialize in building AI-powered assistants, mobile applications with Flutter, and embedded systems using Raspberry Pi/Arduino.",
-            subBio: "From creating voice-controlled kitchen assistants to developing vehicle tracking and mapping systems, I focus on solving real-world problems with innovative technology stacks like Python, Django, and Generative AI.",
+            subBio: "From creating Edge AI presentation assistants to fine-tuning vision-language models and building local agent ecosystems, I focus on solving complex problems with technologies like Python, MS-Swift, and LangChain.",
             techTitle: "Tech Stack"
         },
         experience: [
@@ -56,10 +56,34 @@ export const portfolioData = {
             viewProject: "View Details",
             items: [
                 {
+                    title: "AI-Powered Presentation Assistant",
+                    description: "An intelligent system that analyzes real-time speech during presentations to automatically navigate slides, powered by Edge AI logic and a modern web stack.  ",
+                    techStack: ["Next.js", "FastAPI", "RAG", "Whisper", "GPT-4o"],
+                    link: "https://github.com/oznurkarahasan/ai-presentation-assistant.git"
+                },
+                {
+                    title: "Local Agent Collective",
+                    description: "A scalable ecosystem of multiple AI agents designed to run fully locally. It ensures total data privacy by utilizing local LLMs through Ollama and LangChain for task orchestration, eliminating the need for external cloud dependencies.",
+                    techStack: ["Python", "FastAPI", "Ollama", "LangChain", "Docker"],
+                    link: "https://github.com/oznurkarahasan/local-agent-collective.git"
+                },
+                {
+                    title: "Analog Clock with ESP32 & NeoPixels",
+                    description: "ESP32-based analog clock with NeoPixel LEDs. Features NTP time sync over WiFi, RTC backup, web interface control, LDR brightness auto-adjustment, and OTA updates.",
+                    techStack: ["ESP32", "NeoPixel", "C++", "WiFi", "NTP", "RTC (DS3231)", "Web Interface"],
+                    link: "https://github.com/oznurkarahasan/analog-clock.git"
+                },
+                {
                     title: "Danilo: Voice Kitchen Assistant",
                     description: "An AI-powered voice assistant for the kitchen. Uses Adaptive RAG architecture and FAISS for semantic search to provide personalized recipe guidance.",
                     techStack: ["Python", "Django", "GPT-4o", "FAISS", "RAG", "Generative AI"],
                     link: "https://github.com/oznurkarahasan/Danilo.git"
+                },
+                {
+                    title: "LLM fine tuning with MS-Swift",
+                    description: "End-to-end fine-tuning and deployment of the Qwen2-VL-7B-Instruct vision-language model using MS-Swift for high-accuracy traffic sign recognition.",
+                    techStack: ["Python", "MS-Swift", "Fine-tuning", "Qwen2-VL", "Vision-Language Model", "Traffic Sign Recognition"],
+                    link: "https://github.com/oznurkarahasan/llm-finetuning-swift.git"
                 },
                 {
                     title: "Wastewater Predictive Maintenance",
@@ -139,7 +163,7 @@ export const portfolioData = {
             social: "Follow Me"
         },
         chatbot: {
-            initialMessage: "Hi! I'm Olric. The AI Assistant. Ask me about my projects like 'Danilo' or my experience with Flutter and IoT.",
+            initialMessage: "Hi! I'm Olric. I'm here to help you explore Öznur's projects in AI, IoT, and Full Stack development. What are you interested in today?",
             placeholder: "Ask about the projects...",
             thinking: "Processing..."
         },
@@ -174,7 +198,7 @@ export const portfolioData = {
         about: {
             title: "Hakkımda",
             bio: "Yazılım dünyası ile fiziksel dünyayı birleştirmeyi seven bir mühendisim. Yapay zeka destekli asistanlar, Flutter ile mobil uygulamalar ve Raspberry Pi/Arduino tabanlı gömülü sistemler geliştirmek üzerine uzmanlaşıyorum.",
-            subBio: "Sesli mutfak asistanlarından araç takip ve haritalama sistemlerine kadar, Python, Django ve Üretken Yapay Zeka gibi modern teknolojileri kullanarak gerçek dünya problemlerine çözümler üretiyorum.",
+            subBio: "Edge AI sunum asistanlarından görüntü-dil modellerinin ince ayarına ve yerel ajan ekosistemlerine kadar, Python, MS-Swift ve LangChain gibi teknolojilerle karmaşık problemlere çözümler üretiyorum.",
             techTitle: "Teknoloji Yığınım"
         },
         experience: [
@@ -202,10 +226,34 @@ export const portfolioData = {
             viewProject: "Projeyi Gör",
             items: [
                 {
+                    title: "Yapay Zeka Destekli Sunum Asistanı",
+                    description: "Sunumlar sırasında konuşmayı gerçek zamanlı analiz ederek slaytları otomatik olarak yöneten, Edge AI mantığı ve modern bir web yığınıyla güçlendirilmiş akıllı bir sistem.",
+                    techStack: ["Next.js", "FastAPI", "RAG", "Whisper", "GPT-4o"],
+                    link: "https://github.com/oznurkarahasan/ai-presentation-assistant.git"
+                },
+                {
+                    title: "Local Agent Collective",
+                    description: "Tamamen yerel olarak çalışacak şekilde tasarlanmış, ölçeklenebilir bir çoklu yapay zeka ajanı ekosistemi. Ollama ve LangChain kullanarak, harici bulut bağımlılığı olmadan karmaşık görevleri koordine eder ve %100 veri gizliliği sağlar.",
+                    techStack: ["Python", "FastAPI", "Ollama", "LangChain", "Docker"],
+                    link: "https://github.com/oznurkarahasan/local-agent-collective.git"
+                },
+                {
+                    title: "ESP32 ve NeoPixel ile Analog Saat",
+                    description: "ESP32 ve NeoPixel LED'li analog saat. WiFi üzerinden NTP senkronizasyonu, RTC yedekleme, web arayüzü kontrolü ve LDR ile otomatik parlaklık sunar.",
+                    techStack: ["ESP32", "NeoPixel", "C++", "WiFi", "NTP", "RTC (DS3231)", "Web Arayüzü"],
+                    link: "https://github.com/oznurkarahasan/analog-clock.git"
+                },
+                {
                     title: "Danilo: Sesli Mutfak Asistanı",
                     description: "Mutfaklar için geliştirilmiş yapay zeka asistanı. Kişiselleştirilmiş tarif rehberliği için Adaptive RAG mimarisi ve FAISS kullanır.",
                     techStack: ["Python", "Django", "GPT-4o", "FAISS", "RAG", "Generative AI"],
                     link: "https://github.com/oznurkarahasan/Danilo.git"
+                },
+                {
+                    title: "MS-Swift ile LLM İnce Ayar (Fine-tuning)",
+                    description: "MS-Swift kullanarak Qwen2-VL görüntü-dil modelinin trafik işareti tanıma için uçtan uca ince ayar (fine-tuning) ve dağıtım süreci.",
+                    techStack: ["Python", "MS-Swift", "Fine-tuning", "Qwen2-VL", "Görüntü-Dil Modeli", "Trafik İşareti Tanıma"],
+                    link: "https://github.com/oznurkarahasan/llm-finetuning-swift.git"
                 },
                 {
                     title: "Atıksu Tahminleyici Bakım",
@@ -290,7 +338,7 @@ export const portfolioData = {
             social: "Takip Et"
         },
         chatbot: {
-            initialMessage: "Merhaba! Ben Olric. Yapay Zeka Asistanı. Bana 'Danilo' projesini, Flutter deneyimimi veya gömülü sistem projelerimi sorabilirsin.",
+            initialMessage: "Selam! Ben Olric. Öznur'un yapay zeka, IoT ve Full Stack projelerini keşfetmene yardımcı olmak için buradayım. Bugün hangi alanla ilgileniyorsun?",
             placeholder: "Projeler hakkında sor...",
             thinking: "Düşünüyor..."
         },
@@ -317,15 +365,16 @@ export const portfolioData = {
         }
     },
     skills: [
-        "Python (Django/FastAPI/LightGBM)",
+        "Python (Django/FastAPI/MS-Swift)",
         "PHP (Laravel 12)",
         "C# (Entity Framework)",
-        "Flutter / Dart",
-        "React / Next.js 14",
-        "Generative AI / RAG / FAISS",
-        "Embedded Systems (Raspberry Pi Pico/ESP32)",
-        "C++ / OpenCV / MAVLink",
-        "SQL Server / PostgreSQL / MySQL"
+        "Flutter / Dart / ARCore",
+        "React / Next.js 15 / TypeScript",
+        "Generative AI / RAG / Fine-tuning / LangChain",
+        "Embedded Systems (ESP32/NeoPixel/Pi Pico)",
+        "C++ / OpenCV / Edge AI",
+        "SQL Server / PostgreSQL / MySQL",
+        "Docker / Ollama / Linux"
     ],
     systemPrompt: `You are an AI assistant for a Full Stack Developer & IoT Engineer's portfolio.
   Your goal is to answer visitor questions professionally, technically accurate, yet strictly based on the provided data.
@@ -334,9 +383,11 @@ export const portfolioData = {
   The developer specializes in merging software with hardware. Key areas: Generative AI (RAG), Mobile Dev (Flutter), and Embedded Systems.
   
   **Key Projects to Mention:**
-  1. **Danilo:** A Voice Kitchen Assistant using Python, Django, and Adaptive RAG architecture. It helps with cooking via voice commands.
-  2. **Indoor Navigation:** A Flutter app for the visuallys impaired using BLE and AR for indoor navigation.
-  3. **Embedded Works:** Experience with Raspberry Pi Pico, MPU6050 sensors, and C++/MicroPython.
+  1. **Precue.ai:** AI-Powered Presentation Assistant using Edge AI, Next.js, and FastAPI.
+  2. **Local Agent Collective:** A fully local, privacy-guaranteed AI agent ecosystem using Ollama and LangChain.
+  3. **Danilo:** A Voice Kitchen Assistant using Python, Django, and Adaptive RAG architecture.
+  4. **Indoor Navigation:** A Flutter app for the visually impaired using BLE and AR for indoor navigation.
+  5. **Embedded Works:** Experience with ESP32 (NeoPixel Clock), Raspberry Pi Pico, and C++.
   
   **Tone:**
   Friendly, "Geeky" but professional. Convince them that this developer is innovative and versatile.
