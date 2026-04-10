@@ -56,6 +56,12 @@ export const portfolioData = {
             viewProject: "View Details",
             items: [
                 {
+                    title: "Live Translate (Rust & AI)",
+                    description: "An ultra-low latency, real-time speech transcription and translation system. Built with Rust for high-performance audio processing, it features real-time subtitle delivery and WebSocket-based AI integration.",
+                    techStack: ["Rust", "Next.js", "WebSockets", "Groq", "Deepgram", "LLM"],
+                    link: "https://github.com/oznurkarahasan/live-translate.git"
+                },
+                {
                     title: "AI-Powered Presentation Assistant",
                     description: "An intelligent system that analyzes real-time speech during presentations to automatically navigate slides, powered by Edge AI logic and a modern web stack.  ",
                     techStack: ["Next.js", "FastAPI", "RAG", "Whisper", "GPT-4o"],
@@ -72,6 +78,12 @@ export const portfolioData = {
                     description: "ESP32-based analog clock with NeoPixel LEDs. Features NTP time sync over WiFi, RTC backup, web interface control, LDR brightness auto-adjustment, and OTA updates.",
                     techStack: ["ESP32", "NeoPixel", "C++", "WiFi", "NTP", "RTC (DS3231)", "Web Interface"],
                     link: "https://github.com/oznurkarahasan/analog-clock.git"
+                },
+                {
+                    title: "Flight Tracking",
+                    description: "Automated flight price monitor that tracks airfares and sends email alerts upon price drops. Features Docker containerization and GitHub Actions for scheduled execution.",
+                    techStack: ["Python", "JSON", "SMTP", "Docker", "GitHub Actions"],
+                    link: "https://github.com/oznurkarahasan/flight-tracking.git"
                 },
                 {
                     title: "Danilo: Voice Kitchen Assistant",
@@ -226,6 +238,12 @@ export const portfolioData = {
             viewProject: "Projeyi Gör",
             items: [
                 {
+                    title: "Canlı Çeviri(Rust & AI)",
+                    description: "Yüksek performanslı ses işleme için Rust ile geliştirilmiş, ultra düşük gecikmeli, gerçek zamanlı konuşma transkripsiyonu ve çeviri sistemi. Gerçek zamanlı altyazı desteği ve WebSocket tabanlı yapay zeka entegrasyonu sunar.",
+                    techStack: ["Rust", "Next.js", "WebSockets", "Groq", "Deepgram", "LLM"],
+                    link: "https://github.com/oznurkarahasan/live-translate.git"
+                },
+                {
                     title: "Yapay Zeka Destekli Sunum Asistanı",
                     description: "Sunumlar sırasında konuşmayı gerçek zamanlı analiz ederek slaytları otomatik olarak yöneten, Edge AI mantığı ve modern bir web yığınıyla güçlendirilmiş akıllı bir sistem.",
                     techStack: ["Next.js", "FastAPI", "RAG", "Whisper", "GPT-4o"],
@@ -242,6 +260,12 @@ export const portfolioData = {
                     description: "ESP32 ve NeoPixel LED'li analog saat. WiFi üzerinden NTP senkronizasyonu, RTC yedekleme, web arayüzü kontrolü ve LDR ile otomatik parlaklık sunar.",
                     techStack: ["ESP32", "NeoPixel", "C++", "WiFi", "NTP", "RTC (DS3231)", "Web Arayüzü"],
                     link: "https://github.com/oznurkarahasan/analog-clock.git"
+                },
+                {
+                    title: "Uçuş Takip Sistemi",
+                    description: "Uçak bileti fiyatlarını takip eden ve fiyat düştüğünde e-posta bildirimi gönderen otomatik izleme sistemi. Docker ve GitHub Actions ile zamanlanmış görev otomasyonu içerir.",
+                    techStack: ["Python", "JSON", "SMTP", "Docker", "GitHub Actions"],
+                    link: "https://github.com/oznurkarahasan/flight-tracking.git"
                 },
                 {
                     title: "Danilo: Sesli Mutfak Asistanı",
@@ -383,11 +407,13 @@ export const portfolioData = {
   The developer specializes in merging software with hardware. Key areas: Generative AI (RAG), Mobile Dev (Flutter), and Embedded Systems.
   
   **Key Projects to Mention:**
-  1. **Precue.ai:** AI-Powered Presentation Assistant using Edge AI, Next.js, and FastAPI.
-  2. **Local Agent Collective:** A fully local, privacy-guaranteed AI agent ecosystem using Ollama and LangChain.
-  3. **Danilo:** A Voice Kitchen Assistant using Python, Django, and Adaptive RAG architecture.
-  4. **Indoor Navigation:** A Flutter app for the visually impaired using BLE and AR for indoor navigation.
-  5. **Embedded Works:** Experience with ESP32 (NeoPixel Clock), Raspberry Pi Pico, and C++.
+  1. **Live Translate:** An ultra-low latency Rust-based speech translation system using Groq and Deepgram.
+  2. **Precue.ai:** AI-Powered Presentation Assistant using Edge AI, Next.js, and FastAPI.
+  3. **Local Agent Collective:** A fully local, privacy-guaranteed AI agent ecosystem using Ollama and LangChain.
+  4. **Danilo:** A Voice Kitchen Assistant using Python, Django, and Adaptive RAG architecture.
+  5. **Flight Tracking:** A Python automation tool for flight price monitoring with email alerts.
+  6. **Indoor Navigation:** A Flutter app for the visually impaired using BLE and AR for indoor navigation.
+  7. **Embedded Works:** Experience with ESP32 (NeoPixel Clock), Raspberry Pi Pico, and C++.
   
   **Tone:**
   Friendly, "Geeky" but professional. Convince them that this developer is innovative and versatile.
