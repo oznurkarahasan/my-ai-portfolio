@@ -1,0 +1,19 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import Navbar from '../components/Navbar.astro';
+import Hero from '../components/Hero.astro';
+---
+
+<MainLayout title="Öznur Karahasan | Zen Portfolio">
+  <Navbar />
+  <Hero />
+  
+  <!-- Bu bölüme daha sonra minimalist Proje kartları da eklenecek -->
+  <section id="projects" class="py-20 px-6 max-w-5xl mx-auto">
+    <div class="h-[1px] w-full bg-gradient-to-r from-white/10 via-white/5 to-transparent mb-20"></div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 text-white/40 text-sm italic">
+        <p>// Projeler şu an optimize ediliyor...</p>
+        <p class="text-right">// 2026 Edition</p>
+    </div>
+  </section>
+</MainLayout>
