@@ -4,19 +4,25 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "dev:astro": "astro dev",
     "build": "next build",
+    "build:astro": "astro build",
     "start": "next start",
+    "preview": "astro preview",
     "lint": "eslint"
   },
   "dependencies": {
+    "@astrojs/react": "^5.0.0",
     "@google/generative-ai": "^0.24.1",
+    "@tailwindcss/vite": "^4.2.2",
+    "astro": "^6.0.5",
     "dotenv": "^17.2.3",
     "framer-motion": "^12.23.26",
     "gray-matter": "^4.0.3",
     "lucide-react": "^0.561.0",
     "next": "^16.1.6",
-    "react": "19.2.1",
-    "react-dom": "19.2.1",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5",
     "react-github-calendar": "^5.0.2",
     "react-markdown": "^10.1.0",
     "sudoku-gen": "^1.0.2"
